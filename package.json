@@ -1,13 +1,13 @@
 {
   "type": "module",
-  "name": "schedule-backend",
+  "name": "workerscheduling-t4-backend",
   "version": "1.0.0",
   "description": "Schedule Node.js with Rest API",
   "main": "server.js",
   "scripts": {
     "test": "jest --",
     "start": "node server.js",
-    "bundle": "mkdir deploy && cp -r app server.js package.json package-lock.json schedule-backend.service .env deploy"
+    "bundle": "mkdir deploy && cp -r app server.js package.json package-lock.json workerscheduling-t4-backend.service .env deploy"
   },
   "keywords": [
     "node.js",
