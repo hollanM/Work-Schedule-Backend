@@ -23,7 +23,7 @@ exports.create = (req, res) => {
     published: req.body.published ? req.body.published : false,
   };
   
-  logger.debug(`Creating lesson: ${lesson.title} for schedule: ${lesson.tutorialId}`);
+  logger.debug(`Creating lesson: ${lesson.title} for tutorial: ${lesson.tutorialId}`);
   
   // Save Lesson in the database
   Lesson.create(lesson)
@@ -64,7 +64,7 @@ exports.findAll = (req, res) => {
       });
     });
 };
-// Retrieve all Lessons for a schedule from the database.
+// Retrieve all Lessons for a tutorial from the database.
 exports.findAllForTutorial = (req, res) => {
   const tutorialId = req.params.tutorialId;
 

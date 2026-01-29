@@ -1,4 +1,4 @@
-describe("schedule controller", () => {
+describe("tutorial controller", () => {
   const mockFindAllFunction = jest.fn().mockResolvedValue(Promise.resolve([]));
   const mockFindByPkFunction = jest.fn().mockResolvedValue(Promise.resolve([]));
   jest.mock("../../app/models", () => ({
@@ -10,7 +10,7 @@ describe("schedule controller", () => {
         like: jest.fn().mockImplementation(() => true),
       },
     },
-    schedule: {
+    tutorial: {
       findAll: mockFindAllFunction,
       findByPk: mockFindByPkFunction,
     },
@@ -28,9 +28,9 @@ describe("schedule controller", () => {
   const request = require("supertest");
 
   var testTutorial = {
-    title: "Automated Testing Schedule",
+    title: "Automated Testing Tutorial",
     description:
-      "This schedule shows an example test suite of a NodeJS backend",
+      "This tutorial shows an example test suite of a NodeJS backend",
     published: false,
     userId: 1,
   };
@@ -39,7 +39,7 @@ describe("schedule controller", () => {
     it("authenticates the user", async () => {
       mockFindAllFunction.mockResolvedValue(Promise.resolve([]));
       await request(app)
-        .get("/schedule/tutorials")
+        .get("/tutorial/tutorials")
         .then((response) => {
           expect(authFunction).toHaveBeenCalled();
         });
@@ -48,7 +48,7 @@ describe("schedule controller", () => {
     it("calls findAll without query", async () => {
       mockFindAllFunction.mockResolvedValue(Promise.resolve([]));
       await request(app)
-        .get("/schedule/tutorials")
+        .get("/tutorial/tutorials")
         .expect(200)
         .then((response) => {
           expect(mockFindAllFunction).toHaveBeenCalled();
@@ -58,7 +58,7 @@ describe("schedule controller", () => {
     it("calls findAll with query", async () => {
       mockFindAllFunction.mockResolvedValue(Promise.resolve([]));
       await request(app)
-        .get("/schedule/tutorials?title=Automated")
+        .get("/tutorial/tutorials?title=Automated")
         .expect(200)
         .then((response) => {
           expect(mockFindAllFunction).toHaveBeenCalledWith({
@@ -74,7 +74,7 @@ describe("schedule controller", () => {
     it("responds with results from findAll", async () => {
       mockFindAllFunction.mockResolvedValue(Promise.resolve([testTutorial]));
       await request(app)
-        .get("/schedule/tutorials")
+        .get("/tutorial/tutorials")
         .expect(200)
         .then((response) => {
           expect(response.body).toHaveLength(1);
@@ -87,7 +87,7 @@ describe("schedule controller", () => {
         Promise.reject(new Error("Fake error from test"))
       );
       await request(app)
-        .get("/schedule/tutorials")
+        .get("/tutorial/tutorials")
         .expect(500)
         .then((response) => {
           expect(response.body.message).toBe("Fake error from test");
@@ -99,7 +99,7 @@ describe("schedule controller", () => {
     it("authenticates the user", async () => {
       mockFindAllFunction.mockResolvedValue(Promise.resolve([]));
       await request(app)
-        .get("/schedule/tutorials/userTut/1")
+        .get("/tutorial/tutorials/userTut/1")
         .then((response) => {
           expect(authFunction).toHaveBeenCalled();
         });
@@ -108,7 +108,7 @@ describe("schedule controller", () => {
     it("calls findAllForUser", async () => {
       mockFindAllFunction.mockResolvedValue(Promise.resolve([]));
       await request(app)
-        .get("/schedule/tutorials/userTut/1")
+        .get("/tutorial/tutorials/userTut/1")
         .expect(200)
         .then((response) => {
           expect(mockFindAllFunction).toHaveBeenCalledWith({
@@ -124,7 +124,7 @@ describe("schedule controller", () => {
         await Promise.resolve([testTutorial])
       );
       await request(app)
-        .get("/schedule/tutorials/userTut/1")
+        .get("/tutorial/tutorials/userTut/1")
         .expect(200)
         .then((response) => {
           expect(response.body).toHaveLength(1);
@@ -137,7 +137,7 @@ describe("schedule controller", () => {
         Promise.reject(new Error("Fake error from test"))
       );
       await request(app)
-        .get("/schedule/tutorials/userTut/1")
+        .get("/tutorial/tutorials/userTut/1")
         .expect(500)
         .then((response) => {
           expect(response.body.message).toBe("Fake error from test");
@@ -145,11 +145,11 @@ describe("schedule controller", () => {
     });
   });
 
-  describe("find a schedule by its id", () => {
+  describe("find a tutorial by its id", () => {
     it("authenticates the user", async () => {
       mockFindByPkFunction.mockResolvedValue(Promise.resolve([]));
       await request(app)
-        .get("/schedule/tutorials/1")
+        .get("/tutorial/tutorials/1")
         .then((response) => {
           expect(authFunction).toHaveBeenCalled();
         });
@@ -158,7 +158,7 @@ describe("schedule controller", () => {
     it("calls findOne", async () => {
       mockFindByPkFunction.mockResolvedValue(Promise.resolve([]));
       await request(app)
-        .get("/schedule/tutorials/1")
+        .get("/tutorial/tutorials/1")
         .expect(200)
         .then((response) => {
           expect(mockFindByPkFunction).toHaveBeenCalledWith("1");
@@ -170,7 +170,7 @@ describe("schedule controller", () => {
         await Promise.resolve([testTutorial])
       );
       await request(app)
-        .get("/schedule/tutorials/1")
+        .get("/tutorial/tutorials/1")
         .expect(200)
         .then((response) => {
           expect(response.body).toHaveLength(1);
@@ -183,7 +183,7 @@ describe("schedule controller", () => {
         Promise.reject(new Error("Fake error from test"))
       );
       await request(app)
-        .get("/schedule/tutorials/1")
+        .get("/tutorial/tutorials/1")
         .expect(500)
         .then((response) => {
           expect(response.body.message).toBe("Fake error from test");

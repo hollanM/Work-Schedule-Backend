@@ -14,7 +14,7 @@ describe("database wrapper", () => {
       belongsTo: jest.fn(),
     })
   );
-  const schedule = jest.mock("../app/models/schedule.model.js", () =>
+  const tutorial = jest.mock("../app/models/tutorial.model.js", () =>
     jest.fn().mockReturnValue({
       hasMany: jest.fn(),
       belongsTo: jest.fn(),

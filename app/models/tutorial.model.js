@@ -1,7 +1,7 @@
 import Sequelize from "sequelize";
 import SequelizeInstance from "../config/sequelizeInstance.js";
 
-const Schedule = SequelizeInstance.define("schedule", {
+const Tutorial = SequelizeInstance.define("tutorial", {
     title: {
       type: Sequelize.STRING,
     },
@@ -13,4 +13,4 @@ const Schedule = SequelizeInstance.define("schedule", {
     },
   });
    
-export default Schedule;
+export default Tutorial;
