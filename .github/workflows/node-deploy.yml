@@ -45,7 +45,7 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
           ARGS: "-rltgoDzvO --delete"
           SOURCE: "deploy/"
-          REMOTE_HOST: "workscheduling.eaglesoftwareteam.com"
+          REMOTE_HOST: "workerscheduling.eaglesoftwareteam.com"
           REMOTE_USER: ubuntu
           TARGET: "nodeapps/sev2026/t4"
       - name: Execute SSH commmands on remote server
@@ -53,7 +53,7 @@ jobs:
         env:
           NAME: "Root"
         with:
-          hosts: "ubuntu@tutorial.eaglesoftwareteam.com"
+          hosts: "ubuntu@workerscheduling.eaglesoftwareteam.com"
           privateKey: ${{ secrets.SERVER_SSH_KEY }}
           debug: false
           command: |
