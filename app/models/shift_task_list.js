@@ -12,6 +12,7 @@ const Shift_Task_List = SequelizeInstance.define("shift_task_lists", {
    department_id:{
     type: Sequelize.INTEGER,
     allowNull: true,
+    defaultValue: null,
     //foreign key constraint for departments table
    /*
     references:{
