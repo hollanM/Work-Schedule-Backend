@@ -8,8 +8,9 @@ import User from "./user.model.js";
 import Session from "./session.model.js";
 import Tutorial from "./tutorial.model.js";
 import Lesson from "./lesson.model.js"; 
-
-
+import Shift from "./shift.js";
+import Shift_Task_List from "./shift_task_list.js";
+import Task from "./task.js";
 const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
@@ -18,6 +19,12 @@ db.user = User;
 db.session = Session;
 db.tutorial = Tutorial;
 db.lesson = Lesson;
+
+//Julian's CHANGES START HERE
+db.shift = Shift;
+db.shift_task_list = Shift_Task_List;
+db.task = Task;
+//Julian's CHANGES END HERE
 
 // foreign key for session
 db.user.hasMany(
@@ -54,5 +61,32 @@ db.lesson.belongsTo(
   { as: "tutorial" },
   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
 );
+
+
+//Julian's CHANGES START HERE
+//Foreign key assocations for Shift, Shift_Task_List, and Task models will be under here...
+//1-1 relationship for shift, and shift task lists (AI keeps trying to write lines for me and I hate it)
+Shift.belongsTo(Shift_Task_List, {
+  foreignKey: "shift_task_list_id",
+  as: "shift_task_list",
+});
+
+Shift_Task_List.hasOne(Shift, {
+  foreignKey: "shift_task_list_id",
+  as: "shift",
+});
+
+Shift_Task_List.hasMany(Task, {
+  foreignKey: "shift_task_list_id",
+  as: "tasks",
+});
+
+Task.belongsTo(ShiftTaskList, {
+  foreignKey: "shift_task_list_id",
+  as: "shift_task_list",
+});
+//Julian's CHANGES END HERE
+
+
 
 export default db;
