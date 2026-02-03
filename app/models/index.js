@@ -10,7 +10,6 @@ import Tutorial from "./tutorial.model.js";
 import Lesson from "./lesson.model.js"; 
 import Shift from "./shift.js";
 import Shift_Task_List from "./shift_task_list.js";
-import Task from "./task.js";
 const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
@@ -23,7 +22,6 @@ db.lesson = Lesson;
 //Julian's CHANGES START HERE
 db.shift = Shift;
 db.shift_task_list = Shift_Task_List;
-db.task = Task;
 //Julian's CHANGES END HERE
 
 // foreign key for session
@@ -76,15 +74,7 @@ Shift_Task_List.hasOne(Shift, {
   as: "shift",
 });
 
-Shift_Task_List.hasMany(Task, {
-  foreignKey: "shift_task_list_id",
-  as: "tasks",
-});
 
-Task.belongsTo(ShiftTaskList, {
-  foreignKey: "shift_task_list_id",
-  as: "shift_task_list",
-});
 //Julian's CHANGES END HERE
 
 
