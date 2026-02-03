@@ -7,7 +7,9 @@ import sequelize from "../config/sequelizeInstance.js";
 import User from "./user.model.js";
 import Session from "./session.model.js";
 import Tutorial from "./tutorial.model.js";
-import Lesson from "./lesson.model.js"; 
+import Lesson from "./lesson.model.js";
+import Notification from "./notification.model.js";
+import NotificationList from "./notification_list.model.js"; 
 
 
 const db = {};
@@ -18,6 +20,8 @@ db.user = User;
 db.session = Session;
 db.tutorial = Tutorial;
 db.lesson = Lesson;
+db.notification = Notification;
+db.notificationList = NotificationList;
 
 // foreign key for session
 db.user.hasMany(
@@ -54,5 +58,41 @@ db.lesson.belongsTo(
   { as: "tutorial" },
   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
 );
+
+// foreign key for notifications
+db.notificationList.hasMany(db.notification, {
+  as: "notifications",
+  foreignKey: { name: "notificationListId", allowNull: false },
+  onDelete: "CASCADE",
+});
+db.notification.belongsTo(db.notificationList, {
+  as: "notificationList",
+  foreignKey: { name: "notificationListId", allowNull: false },
+  onDelete: "CASCADE",
+});
+
+// notifications belong to a user (optional)
+db.user.hasMany(db.notification, {
+  as: "notifications",
+  foreignKey: { name: "userId", allowNull: true },
+  onDelete: "CASCADE",
+});
+db.notification.belongsTo(db.user, {
+  as: "user",
+  foreignKey: { name: "userId", allowNull: true },
+  onDelete: "CASCADE",
+});
+
+// notification lists may belong to a user
+db.user.hasMany(db.notificationList, {
+  as: "notificationLists",
+  foreignKey: { name: "userId", allowNull: true },
+  onDelete: "CASCADE",
+});
+db.notificationList.belongsTo(db.user, {
+  as: "user",
+  foreignKey: { name: "userId", allowNull: true },
+  onDelete: "CASCADE",
+});
 
 export default db;
