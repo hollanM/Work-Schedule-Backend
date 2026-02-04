@@ -1,32 +1,19 @@
 import db  from "../models/index.js";
 import logger from "../config/logger.js";
 
-const NotificationList = db.notification_list;
+const NotificationList = db.notificationList;
 const Op = db.Sequelize.Op;
 const exports = {};
 // Create and Save a new NotificationList
 exports.create = (req, res) => {
-  // Validate request
-  if (!req.body.title) {
-    logger.warn('NotificationList creation attempt with empty title');
-    res.status(400).send({
-      message: "Content can not be empty!",
-    });
-    return;
-  }
-
   // Create a NotificationList
   // Create a NotificationList
   const notification_list = {
-    title: req.body.title,
-    description: req.body.description,
-    published: req.body.published ? req.body.published : false,
     employee_id: req.body.employee_id || null,
     department_id: req.body.department_id || null,
-    userId: req.body.userId || null,
   };
   
-  logger.debug(`Creating notification_list: ${notification_list.title}`);
+  logger.debug(`Creating notification_list: ${JSON.stringify(notification_list)}`);
   
   // Save NotificationList in the database
   NotificationList.create(notification_list)

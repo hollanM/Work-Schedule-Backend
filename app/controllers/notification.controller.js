@@ -17,11 +17,14 @@ exports.create = (req, res) => {
 
   // Create a Notification
   const notification = {
-    notificationListId: req.body.notificationListId || req.params.notificationListId,
+    notificationListId: req.body.notificationListId || req.body.notificationList_id || req.params.notificationListId,
     userId: req.body.userId || null,
     title: req.body.title,
     description: req.body.description,
-    published: req.body.published ? req.body.published : false,
+    to: req.body.to,
+    type: req.body.type,
+    is_read: req.body.is_read === "true" || req.body.is_read === true ? true : false,
+    date_time_sent: req.body.date_time_sent || null,
   };
 
   logger.debug(`Creating notification: ${notification.title} for list: ${notification.notificationListId}`);

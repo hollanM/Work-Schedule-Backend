@@ -3,24 +3,41 @@
   import { Router } from "express";
   var router = Router()
 
-
-  // Create a new Notification
-  router.post("/", [authenticate], notification.create);
+    // Create a new Notification
+  router.post("/", notification.create);
 
   // Retrieve all Notifications
-  router.get("/", [authenticate], notification.findAll);
+  router.get("/", notification.findAll);
 
   // Retrieve all Notifications for user
-  router.get("/userTut/:userId", [authenticate], notification.findAllForUser);
+  router.get("/userTut/:userId", notification.findAllForUser);
 
   // Retrieve a single Tutorial with id
-  router.get("/:id", [authenticate], notification.findOne);
+  router.get("/:id", notification.findOne);
 
   // Update a Tutorial with id
-  router.put("/:id", [authenticate], notification.update);
+  router.put("/:id", notification.update);
 
   // Delete a Tutorial with id
-  router.delete("/:id", [authenticate], notification.delete);
+  router.delete("/:id", notification.delete);
+
+  // // Create a new Notification
+  // router.post("/", [authenticate], notification.create);
+
+  // // Retrieve all Notifications
+  // router.get("/", [authenticate], notification.findAll);
+
+  // // Retrieve all Notifications for user
+  // router.get("/userTut/:userId", [authenticate], notification.findAllForUser);
+
+  // // Retrieve a single Tutorial with id
+  // router.get("/:id", [authenticate], notification.findOne);
+
+  // // Update a Tutorial with id
+  // router.put("/:id", [authenticate], notification.update);
+
+  // // Delete a Tutorial with id
+  // router.delete("/:id", [authenticate], notification.delete);
 
 
   export default router;

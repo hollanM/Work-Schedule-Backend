@@ -32,17 +32,8 @@ const Notification = SequelizeInstance.define("notification", {
       type: Sequelize.DATE,
       allowNull: true,
     },
-    published: {
-      type: Sequelize.BOOLEAN,
-      allowNull: false,
-      defaultValue: false,
-    },
-    userId: {
-      type: Sequelize.INTEGER,
-      allowNull: true,
-    },
     notificationListId: {
-      // foreign key to NotificationList (uses camelCase to match associations)
+      // foreign key to NotificationList 
       type: Sequelize.INTEGER,
       allowNull: false,
     },

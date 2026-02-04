@@ -59,40 +59,4 @@ db.lesson.belongsTo(
   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
 );
 
-// foreign key for notifications
-db.notificationList.hasMany(db.notification, {
-  as: "notifications",
-  foreignKey: { name: "notificationListId", allowNull: false },
-  onDelete: "CASCADE",
-});
-db.notification.belongsTo(db.notificationList, {
-  as: "notificationList",
-  foreignKey: { name: "notificationListId", allowNull: false },
-  onDelete: "CASCADE",
-});
-
-// notifications belong to a user (optional)
-db.user.hasMany(db.notification, {
-  as: "notifications",
-  foreignKey: { name: "userId", allowNull: true },
-  onDelete: "CASCADE",
-});
-db.notification.belongsTo(db.user, {
-  as: "user",
-  foreignKey: { name: "userId", allowNull: true },
-  onDelete: "CASCADE",
-});
-
-// notification lists may belong to a user
-db.user.hasMany(db.notificationList, {
-  as: "notificationLists",
-  foreignKey: { name: "userId", allowNull: true },
-  onDelete: "CASCADE",
-});
-db.notificationList.belongsTo(db.user, {
-  as: "user",
-  foreignKey: { name: "userId", allowNull: true },
-  onDelete: "CASCADE",
-});
-
 export default db;

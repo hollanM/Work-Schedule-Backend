@@ -15,23 +15,6 @@ const NotificationList = SequelizeInstance.define("notification_list", {
         type: Sequelize.INTEGER,
         allowNull: true,
       },
-      title: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
-      description: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
-      published: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
-        defaultValue: false,
-      },
-      userId: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-      },
   });
 
 export default NotificationList;
