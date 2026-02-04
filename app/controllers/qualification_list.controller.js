@@ -8,7 +8,7 @@ const exports = {};
 exports.create = (req, res) => {
   // Create a Qualification_List
   const qualification_list = {
-    qualifications: req.body.qualifications,
+    qualification_description: req.body.qualification_description,
   };
   
   logger.debug(`Creating Qualification_List...`);

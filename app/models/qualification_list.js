@@ -3,14 +3,16 @@ import SequelizeInstance from "../config/sequelizeInstance.js";
 const Qualification_List = SequelizeInstance.define("qualification_lists", {
     id:{
         type: Sequelize.INTEGER,
-        authoIncrement: true,
+        autoIncrement: true,
         primaryKey: true,
+        
     },
     //I don't see the purpose of this attribute here.
     //I don't think it will get used. 
-    qualifications: {
+    qualification_description: {
       type: Sequelize.STRING,
       allowNull: true,
+      defaultValue: null,
     },
   });
    

@@ -4,8 +4,8 @@ import SequelizeInstance from "../config/sequelizeInstance.js";
 const Qualification = SequelizeInstance.define("qualifications", {
     id:{
         type: Sequelize.INTEGER,
-        authoIncrement: true,
         primaryKey: true,
+        autoIncrement: true,
     },
     name: {
       type: Sequelize.STRING,

@@ -70,15 +70,16 @@ db.lesson.belongsTo(
 
 
 //Julian's qualification model associations start here
-Qualification_List.hasMany(Qualification, {
-  foreignKey: "qualification_list_id",
-  as: "qualifications",
-});
-
 Qualification.belongsTo(Qualification_List, {
   foreignKey: "qualification_list_id",
   as: "qualification_list",
 });
+
+Qualification_List.hasMany(Qualification, {
+  foreignKey: "qualification_list_id",
+  as: "qualifications",
+});
+//Julian's qualification Model Changes end here
 
 
 export default db;
