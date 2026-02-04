@@ -10,6 +10,12 @@ import Tutorial from "./tutorial.model.js";
 import Lesson from "./lesson.model.js"; 
 
 
+//Julian's Clock list and clock in out changes start here
+import Clock_List from "./clock_list.model.js";
+import Clock_In_Out from "./clock_in_out.model.js";
+//Julian's Clock list and clock in out changes end here 
+
+
 const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
@@ -18,6 +24,15 @@ db.user = User;
 db.session = Session;
 db.tutorial = Tutorial;
 db.lesson = Lesson;
+
+//Julian's Clock list and clock in out changes start here
+db.clock_list = Clock_List;
+db.clock_in_out = Clock_In_Out;
+//Julian's Clock list and clock in out changes end here
+
+
+
+
 
 // foreign key for session
 db.user.hasMany(
@@ -54,5 +69,20 @@ db.lesson.belongsTo(
   { as: "tutorial" },
   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
 );
+
+
+//Julian's Clock list and clock in out foreign key associations start here
+// Exercise 1 <- many ExerciseDay
+Clock_List.hasMany(Clock_In_Out, {
+  foreignKey: "clock_list_id",
+  as: "clock_in_outs"
+});
+
+Clock_In_Out.belongsTo(Clock_List, {
+  foreignKey: "clock_list_id",
+  as: "clock_list"
+});
+
+
 
 export default db;
