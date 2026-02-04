@@ -11,7 +11,7 @@ import Lesson from "./lesson.model.js";
 
 
 //Julian's Task Model Changes begin here
-import Task from "./task.js";
+import Task from "./task.model.js";
 //Julian's Task Model Changes end here
 
 const db = {};
