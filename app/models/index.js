@@ -8,6 +8,9 @@ import User from "./user.model.js";
 import Session from "./session.model.js";
 import Tutorial from "./tutorial.model.js";
 import Lesson from "./lesson.model.js"; 
+//Julian's Manager Setting's Changes Start here
+import Manager_List from "./manager_list.model.js";
+//Julian's Manager Setting's Changes End here
 
 
 const db = {};
@@ -18,6 +21,9 @@ db.user = User;
 db.session = Session;
 db.tutorial = Tutorial;
 db.lesson = Lesson;
+
+//Julian's Manager Setting's Changes Start here
+
 
 // foreign key for session
 db.user.hasMany(
