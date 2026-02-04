@@ -66,15 +66,5 @@ db.lesson.belongsTo(
 
 //Julian's Task Model Changes begin here
 
-/*
-This shifttask list does not exist in this branch. so when everything is merged
-you will need to uncomment this association to have
-it take affect.
 
-Task.belongsTo(ShiftTaskList, {
-  foreignKey: "shift_task_list_id",
-  as: "shift_task_list",
-});
-
-*/
 export default db;
