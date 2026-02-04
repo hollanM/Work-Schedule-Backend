@@ -10,6 +10,13 @@ import Tutorial from "./tutorial.model.js";
 import Lesson from "./lesson.model.js"; 
 
 
+//Julian's qualification model changes start here
+import Qualification_List from "./qualification_list.js";
+import Qualification from "./qualification.js";
+
+//Julian's qualification model changes end here
+
+
 const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
@@ -18,6 +25,12 @@ db.user = User;
 db.session = Session;
 db.tutorial = Tutorial;
 db.lesson = Lesson;
+
+//Julian's qualification model changes start here
+db.qualification_list = Qualification_List;
+db.qualification = Qualification;
+
+//Julian's qualification model changes end here 
 
 // foreign key for session
 db.user.hasMany(
@@ -54,5 +67,18 @@ db.lesson.belongsTo(
   { as: "tutorial" },
   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
 );
+
+
+//Julian's qualification model associations start here
+Qualification_List.hasMany(Qualification, {
+  foreignKey: "qualification_list_id",
+  as: "qualifications",
+});
+
+Qualification.belongsTo(Qualification_List, {
+  foreignKey: "qualification_list_id",
+  as: "qualification_list",
+});
+
 
 export default db;
