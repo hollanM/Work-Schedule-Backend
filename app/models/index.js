@@ -11,8 +11,8 @@ import Lesson from "./lesson.model.js";
 
 
 //Julian's qualification model changes start here
-import Qualification_List from "./qualification_list.js";
-import Qualification from "./qualification.js";
+import Qualification_List from "./qualification_list.model.js";
+import Qualification from "./qualification.model.js";
 
 //Julian's qualification model changes end here
 
