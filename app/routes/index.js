@@ -5,6 +5,11 @@ import UserRoutes from "./user.routes.js";
 import TutorialRoutes from "./tutorial.routes.js";
 import LessonRoutes from "./lesson.routes.js";
 
+//Julian's position changes start here
+import PositionRoutes from "./position.routes.js";
+//Julian's position changes end here
+
+
 
 const router = Router();
 
@@ -12,5 +17,9 @@ router.use("/", AuthRoutes);
 router.use("/users", UserRoutes);
 router.use("/tutorials", TutorialRoutes);
 router.use("/tutorials", LessonRoutes);
+
+//Julian's position changes start here
+router.use("/positions", PositionRoutes);
+//Julian's position changes end here
 
 export default router;

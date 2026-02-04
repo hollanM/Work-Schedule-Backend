@@ -9,6 +9,10 @@ import Session from "./session.model.js";
 import Tutorial from "./tutorial.model.js";
 import Lesson from "./lesson.model.js"; 
 
+//Julian's position changes start here
+import Position from "./position.model.js";
+//Julian's position changes end here
+
 
 const db = {};
 db.Sequelize = Sequelize;
@@ -18,6 +22,10 @@ db.user = User;
 db.session = Session;
 db.tutorial = Tutorial;
 db.lesson = Lesson;
+
+//Julian's position changes start here
+db.position = Position;
+//Julian's position changes end here
 
 // foreign key for session
 db.user.hasMany(
@@ -55,4 +63,9 @@ db.lesson.belongsTo(
   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
 );
 
+
+
+//position associations to qualification list, and department need to go here.
+//I'm deciding to not make a skeleton for them yet, since I can't realistically
+//test them here in this branch. 
 export default db;
