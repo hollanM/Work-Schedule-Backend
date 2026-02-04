@@ -8,6 +8,7 @@ import User from "./user.model.js";
 import Session from "./session.model.js";
 import Tutorial from "./tutorial.model.js";
 import Lesson from "./lesson.model.js"; 
+
 //Julian's Manager Setting's Changes Start here
 import Manager_List from "./manager_list.model.js";
 //Julian's Manager Setting's Changes End here
@@ -23,7 +24,8 @@ db.tutorial = Tutorial;
 db.lesson = Lesson;
 
 //Julian's Manager Setting's Changes Start here
-
+db.manager_list = Manager_List;
+//Julian's Manager Setting's Changes End here
 
 // foreign key for session
 db.user.hasMany(
@@ -60,5 +62,9 @@ db.lesson.belongsTo(
   { as: "tutorial" },
   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
 );
+
+//The associations for manager list
+//(employee, and department) will need to go here
+//so that the foreign keys in them work. 
 
 export default db;
