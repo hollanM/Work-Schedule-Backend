@@ -96,6 +96,22 @@ exports.findOne = (req, res) => {
       });
     });
 };
+
+exports.findAllForQualificationList = async (req, res) => {
+  try {
+    const qualificationListId = req.params.id;
+
+    const days = await Qualification.findAll({
+      where: { qualification_list_id: qualificationListId },
+    });
+
+    res.send(days);
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "Failed to retrieve exercise days."
+    });
+  }
+};
 // Update a Qualification by the id in the request
 exports.update = (req, res) => {
   const id = req.params.id;

@@ -10,6 +10,8 @@
   // Retrieve all qualifications
   router.get("/", /*[authenticate],*/ qualifications.findAll);
 
+  router.get("/qualification_lists/:id", /*[authenticate],*/ qualifications.findAllForQualificationList);
+
   // Retrieve a single qualification with id
   router.get("/:id", /*[authenticate],*/ qualifications.findOne);
 
