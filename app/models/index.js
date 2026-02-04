@@ -10,6 +10,10 @@ import Tutorial from "./tutorial.model.js";
 import Lesson from "./lesson.model.js"; 
 
 
+//Julian's Task Model Changes begin here
+import Task from "./task.js";
+//Julian's Task Model Changes end here
+
 const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
@@ -18,6 +22,10 @@ db.user = User;
 db.session = Session;
 db.tutorial = Tutorial;
 db.lesson = Lesson;
+
+//Julian's Task Model Changes begin here
+db.task = Task;
+//Julian's Task Model Changes end here
 
 // foreign key for session
 db.user.hasMany(
@@ -55,4 +63,18 @@ db.lesson.belongsTo(
   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
 );
 
+
+//Julian's Task Model Changes begin here
+
+/*
+This shifttask list does not exist in this branch. so when everything is merged
+you will need to uncomment this association to have
+it take affect.
+
+Task.belongsTo(ShiftTaskList, {
+  foreignKey: "shift_task_list_id",
+  as: "shift_task_list",
+});
+
+*/
 export default db;
