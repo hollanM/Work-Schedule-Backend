@@ -8,6 +8,7 @@ import User from "./user.model.js";
 import Session from "./session.model.js";
 import Tutorial from "./tutorial.model.js";
 import Lesson from "./lesson.model.js"; 
+import Time_off from "./time_off.model.js";
 
 
 const db = {};
@@ -18,6 +19,7 @@ db.user = User;
 db.session = Session;
 db.tutorial = Tutorial;
 db.lesson = Lesson;
+db.time_off = Time_off;
 
 // foreign key for session
 db.user.hasMany(
@@ -54,5 +56,17 @@ db.lesson.belongsTo(
   { as: "tutorial" },
   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
 );
+
+// foreign key for time_off
+// db.date_time.belongsTo(
+//   db.time_off,
+//   { as: "time_off" },
+//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
+// );
+// db.time_off.belongsTo(
+//   db.employee,
+//   { as: "employee" },
+//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
+// );
 
 export default db;
