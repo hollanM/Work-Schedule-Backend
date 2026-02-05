@@ -9,6 +9,10 @@ import Session from "./session.model.js";
 import Tutorial from "./tutorial.model.js";
 import Lesson from "./lesson.model.js"; 
 
+//Julian's Availability Changes start here
+import Availability from "./availability.model.js";
+//Julian's Availability Changes end here
+
 
 const db = {};
 db.Sequelize = Sequelize;
@@ -18,6 +22,10 @@ db.user = User;
 db.session = Session;
 db.tutorial = Tutorial;
 db.lesson = Lesson;
+
+//Julian's Availability Changes start here
+db.availability = Availability;
+//Julian's Availability Changes end here
 
 // foreign key for session
 db.user.hasMany(
@@ -55,4 +63,7 @@ db.lesson.belongsTo(
   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
 );
 
+
+//Julian's Availability Associations need to start here.
+//this is for employee, and date time.
 export default db;
