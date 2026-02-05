@@ -8,7 +8,7 @@ import User from "./user.model.js";
 import Session from "./session.model.js";
 import Tutorial from "./tutorial.model.js";
 import Lesson from "./lesson.model.js"; 
-import Time_off from "./time_off.model.js";
+import Department from "./department.model.js";
 
 
 const db = {};
@@ -19,7 +19,7 @@ db.user = User;
 db.session = Session;
 db.tutorial = Tutorial;
 db.lesson = Lesson;
-db.time_off = Time_off;
+db.department = Department;
 
 // foreign key for session
 db.user.hasMany(
@@ -58,14 +58,49 @@ db.lesson.belongsTo(
 );
 
 // foreign key for time_off
-// db.date_time.belongsTo(
-//   db.time_off,
-//   { as: "time_off" },
+// db.department.belongsTo(
+//   db.weekely_schedule,
+//   { as: "weekely_schedule" },
 //   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
 // );
-// db.time_off.belongsTo(
-//   db.employee,
-//   { as: "employee" },
+// db.department.belongsTo(
+//   db.position,
+//   { as: "position" },
+//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
+// );
+// db.department.belongsTo(
+//   db.manager_list,
+//   { as: "manager_list" },
+//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
+// );
+// db.department.belongsTo(
+//   db.employee_list,
+//   { as: "employee_list" },
+//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
+// );
+// db.department.belongsTo(
+//   db.clock_list,
+//   { as: "clock_list" },
+//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
+// );
+// db.department.belongsTo(
+//   db.shift,
+//   { as: "shift" },
+//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
+// );
+// db.department.belongsTo(
+//   db.shift_task_list,
+//   { as: "shift_task_list" },
+//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
+// );
+// db.department.belongsTo(
+//   db.notification_list,
+//   { as: "notification_list" },
+//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
+// );
+// db.department_schedule.belongsTo(
+//   db.department,
+//   { as: "department" },
 //   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
 // );
 
