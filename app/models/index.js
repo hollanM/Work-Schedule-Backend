@@ -8,7 +8,7 @@ import User from "./user.model.js";
 import Session from "./session.model.js";
 import Tutorial from "./tutorial.model.js";
 import Lesson from "./lesson.model.js"; 
-import Department from "./department.model.js";
+import In_app_settings from "./in_app_settings.model.js";
 
 
 const db = {};
@@ -19,7 +19,7 @@ db.user = User;
 db.session = Session;
 db.tutorial = Tutorial;
 db.lesson = Lesson;
-db.department = Department;
+db.in_app_settings = In_app_settings;
 
 // foreign key for session
 db.user.hasMany(
@@ -57,50 +57,10 @@ db.lesson.belongsTo(
   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
 );
 
-// foreign key for time_off
-// db.department.belongsTo(
-//   db.weekely_schedule,
-//   { as: "weekely_schedule" },
-//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
-// );
-// db.department.belongsTo(
-//   db.position,
-//   { as: "position" },
-//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
-// );
-// db.department.belongsTo(
-//   db.manager_list,
-//   { as: "manager_list" },
-//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
-// );
-// db.department.belongsTo(
-//   db.employee_list,
-//   { as: "employee_list" },
-//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
-// );
-// db.department.belongsTo(
-//   db.clock_list,
-//   { as: "clock_list" },
-//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
-// );
-// db.department.belongsTo(
-//   db.shift,
-//   { as: "shift" },
-//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
-// );
-// db.department.belongsTo(
-//   db.shift_task_list,
-//   { as: "shift_task_list" },
-//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
-// );
-// db.department.belongsTo(
-//   db.notification_list,
-//   { as: "notification_list" },
-//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
-// );
-// db.department_schedule.belongsTo(
-//   db.department,
-//   { as: "department" },
+// foreign key for in_app_settings
+// db.in_app_settings.belongsTo(
+//   db.employee,
+//   { as: "employee" },
 //   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
 // );
 
