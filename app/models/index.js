@@ -22,6 +22,8 @@ db.tutorial = Tutorial;
 db.lesson = Lesson;
 db.notification = Notification;
 db.notificationList = NotificationList;
+db.employee = User; // Employee table has yet to exist
+db.department = Tutorial; // Department table has yet to exist
 
 // foreign key for session
 db.user.hasMany(
@@ -58,5 +60,24 @@ db.lesson.belongsTo(
   { as: "tutorial" },
   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
 );
+
+// foreign key for notification
+db.notificationList.hasMany(
+  db.notification,
+  { as: "notification" },
+  { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
+);
+
+// foreign key for notification list
+// db.notificationList.belongsTo(
+//   db.employee,
+//   { as: "employee" },
+//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
+// );
+// db.notificationList.hasMany(
+//   db.department,
+//   { as: "department" },
+//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
+// );
 
 export default db;
