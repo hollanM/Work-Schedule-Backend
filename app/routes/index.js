@@ -5,9 +5,10 @@ import UserRoutes from "./user.routes.js";
 import TutorialRoutes from "./tutorial.routes.js";
 import LessonRoutes from "./lesson.routes.js";
 
-//Julian's position changes start here
 import PositionRoutes from "./position.routes.js";
-//Julian's position changes end here
+
+import QualificationRoutes from "./qualification.routes.js";
+import QualificationListRoutes from "./qualification_list.routes.js";
 
 
 
@@ -18,8 +19,9 @@ router.use("/users", UserRoutes);
 router.use("/tutorials", TutorialRoutes);
 router.use("/tutorials", LessonRoutes);
 
-//Julian's position changes start here
 router.use("/positions", PositionRoutes);
-//Julian's position changes end here
+
+router.use("/qualifications", QualificationRoutes);
+router.use("/qualification_lists", QualificationListRoutes);
 
 export default router;

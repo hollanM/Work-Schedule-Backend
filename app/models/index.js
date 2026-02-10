@@ -14,6 +14,13 @@ import Position from "./position.model.js";
 //Julian's position changes end here
 
 
+//Julian's qualification model changes start here
+import Qualification_List from "./qualification_list.model.js";
+import Qualification from "./qualification.model.js";
+
+//Julian's qualification model changes end here
+
+
 const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
@@ -23,9 +30,10 @@ db.session = Session;
 db.tutorial = Tutorial;
 db.lesson = Lesson;
 
-//Julian's position changes start here
 db.position = Position;
-//Julian's position changes end here
+
+db.qualification_list = Qualification_List;
+db.qualification = Qualification;
 
 // foreign key for session
 db.user.hasMany(
@@ -63,9 +71,18 @@ db.lesson.belongsTo(
   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
 );
 
-
-
 //position associations to qualification list, and department need to go here.
 //I'm deciding to not make a skeleton for them yet, since I can't realistically
 //test them here in this branch. 
+
+Qualification.belongsTo(Qualification_List, {
+  foreignKey: "qualification_list_id",
+  as: "qualification_list",
+});
+
+Qualification_List.hasMany(Qualification, {
+  foreignKey: "qualification_list_id",
+  as: "qualifications",
+});
+
 export default db;
