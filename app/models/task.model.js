@@ -43,7 +43,10 @@ const Task = SequelizeInstance.define("tasks", {
   name:{
     type: Sequelize.STRING,
     allowNull: true,
-  }
+  },
+  },
+  {
+    timestamps: false
   });
 
 export default Task;
