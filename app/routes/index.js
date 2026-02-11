@@ -24,6 +24,6 @@ router.use("/positions", PositionRoutes);
 router.use("/qualifications", QualificationRoutes);
 router.use("/qualification_lists", QualificationListRoutes);
 
-router.use("/weekly_schedule", WeeklyScheduleRoutes);
+router.use("/weekly_schedules", WeeklyScheduleRoutes);
 
 export default router;

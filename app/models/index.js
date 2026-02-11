@@ -9,6 +9,7 @@ import Session from "./session.model.js";
 import Tutorial from "./tutorial.model.js";
 import Lesson from "./lesson.model.js"; 
 
+
 //Julian's position changes start here
 import Position from "./position.model.js";
 //Julian's position changes end here
@@ -17,8 +18,9 @@ import Position from "./position.model.js";
 //Julian's qualification model changes start here
 import Qualification_List from "./qualification_list.model.js";
 import Qualification from "./qualification.model.js";
-
 //Julian's qualification model changes end here
+
+import Weekly_Schedule from "./weekly_schedule.model.js";
 
 
 const db = {};
@@ -34,6 +36,8 @@ db.position = Position;
 
 db.qualification_list = Qualification_List;
 db.qualification = Qualification;
+db.weekly_schedule = Weekly_Schedule;
+
 
 // foreign key for session
 db.user.hasMany(
@@ -74,6 +78,10 @@ db.lesson.belongsTo(
 //position associations to qualification list, and department need to go here.
 //I'm deciding to not make a skeleton for them yet, since I can't realistically
 //test them here in this branch. 
+
+
+//note for me (Julian) to add associations for date time and weekly schedule tables here when
+//I get to it. 
 
 Qualification.belongsTo(Qualification_List, {
   foreignKey: "qualification_list_id",
