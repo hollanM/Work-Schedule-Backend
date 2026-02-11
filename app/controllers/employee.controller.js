@@ -19,9 +19,9 @@ exports.create = (req, res) => {
     name: req.body.name, 
     email: req.body.email, 
     phone_num: req.body.phone_num, 
-    OC_id: req.body.OC_id, 
+    oc_id: req.body.oc_id, 
     pay_rate: req.body.pay_rate, 
-    Clocked_in: req.body.Clocked_in ? req.body.Clocked_in : false, 
+    clocked_in: req.body.clocked_in ? req.body.clocked_in : false, 
     has_qualification_list_id: req.body.has_qualification_list_id, 
     app_settings_id: req.body.app_settings_id, 
     preferred_work_time_id: req.body.preferred_work_time_id

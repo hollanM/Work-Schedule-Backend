@@ -5,7 +5,7 @@ const Employee_list = SequelizeInstance.define("employee_list", {
     employee_id: {
       type: Sequelize.INTEGER,
     },
-    Department: {
+    department: {
       type: Sequelize.INTEGER,
     },
   });
