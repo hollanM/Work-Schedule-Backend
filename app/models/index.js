@@ -9,6 +9,10 @@ import Session from "./session.model.js";
 import Tutorial from "./tutorial.model.js";
 import Lesson from "./lesson.model.js"; 
 
+//Julian's Availability Changes start here
+import Availability from "./availability.model.js";
+//Julian's Availability Changes end here
+
 import Department_Schedule from "./department_schedule.model.js";
 import Position from "./position.model.js";
 import Qualification_List from "./qualification_list.model.js";
@@ -23,6 +27,9 @@ db.session = Session;
 db.tutorial = Tutorial;
 db.lesson = Lesson;
 
+//Julian's Availability Changes start here
+db.availability = Availability;
+//Julian's Availability Changes end here
 db.department_schedule = Department_Schedule;
 db.position = Position;
 db.qualification_list = Qualification_List;
@@ -64,6 +71,9 @@ db.lesson.belongsTo(
   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
 );
 
+
+//Julian's Availability Associations need to start here.
+//this is for employee, and date time.
 //Associations for Department_Schedules (to date time) needs to go here. 
 
 //position associations to qualification list, and department need to go here.
