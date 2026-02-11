@@ -5,9 +5,11 @@ import UserRoutes from "./user.routes.js";
 import TutorialRoutes from "./tutorial.routes.js";
 import LessonRoutes from "./lesson.routes.js";
 
-//Julian's department routes changes start here.
+
 import DepartmentScheduleRoutes from "./department_schedule.routes.js";
-//Julian's department routes changes end here.
+import PositionRoutes from "./position.routes.js";
+import QualificationRoutes from "./qualification.routes.js";
+import QualificationListRoutes from "./qualification_list.routes.js";
 
 
 const router = Router();
@@ -17,8 +19,9 @@ router.use("/users", UserRoutes);
 router.use("/tutorials", TutorialRoutes);
 router.use("/tutorials", LessonRoutes);
 
-//Julian's department routes changes start here.
 router.use("/department_schedules", DepartmentScheduleRoutes);
-//Julian's department routes changes end here.
+router.use("/positions", PositionRoutes);
+router.use("/qualifications", QualificationRoutes);
+router.use("/qualification_lists", QualificationListRoutes);
 
 export default router;
