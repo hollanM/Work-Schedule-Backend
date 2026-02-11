@@ -1,22 +1,28 @@
 import Sequelize from "sequelize";
 import SequelizeInstance from "../config/sequelizeInstance.js";
 
-const In_app_settings = SequelizeInstance.define("in_app_settings", {
+const Department = SequelizeInstance.define("departments", {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
       },
-    app_setting_1: {
-        type: Sequelize.BOOLEAN,
+    name: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
-    app_setting_2: {
-        type: Sequelize.BOOLEAN,
+    department_schedule: {
+        type: Sequelize.INTEGER,
         allowNull: false,
+        /*
+        references:{
+            model: "department_schedule",
+            key: "id",
+        }   
+        */
       },
-    app_setting_3: {
-        type: Sequelize.BOOLEAN,
+    break_time_allotted: {
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
       },
@@ -24,4 +30,4 @@ const In_app_settings = SequelizeInstance.define("in_app_settings", {
         timestamps: false //removes the updated at and created at columns in the database for this table
       });
    
-export default In_app_settings;
+export default Department;
