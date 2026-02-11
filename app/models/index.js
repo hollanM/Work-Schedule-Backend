@@ -8,6 +8,8 @@ import User from "./user.model.js";
 import Session from "./session.model.js";
 import Tutorial from "./tutorial.model.js";
 import Lesson from "./lesson.model.js"; 
+import Employee from "./employee.model.js"; 
+import Employee_list from "./employee_list.model.js"; 
 import Shift from "./shift.model.js";
 import Shift_Task_List from "./shift_task_list.model.js";
 
@@ -32,6 +34,10 @@ db.user = User;
 db.session = Session;
 db.tutorial = Tutorial;
 db.lesson = Lesson;
+db.e = Tutorial;
+db.lesson = Lesson;
+db.employee = Employee;
+db.employee_list = Employee_list;
 
 //Julian's Task Model Changes begin here
 db.task = Task;
