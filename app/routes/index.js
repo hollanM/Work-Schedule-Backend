@@ -10,7 +10,7 @@ import PositionRoutes from "./position.routes.js";
 import QualificationRoutes from "./qualification.routes.js";
 import QualificationListRoutes from "./qualification_list.routes.js";
 
-
+import WeeklyScheduleRoutes from "./weekly_schedule.routes.js";
 
 const router = Router();
 
@@ -23,5 +23,7 @@ router.use("/positions", PositionRoutes);
 
 router.use("/qualifications", QualificationRoutes);
 router.use("/qualification_lists", QualificationListRoutes);
+
+router.use("/weekly_schedule", WeeklyScheduleRoutes);
 
 export default router;
