@@ -9,17 +9,10 @@ import Session from "./session.model.js";
 import Tutorial from "./tutorial.model.js";
 import Lesson from "./lesson.model.js"; 
 
-//Julian's position changes start here
+import Department_Schedule from "./department_schedule.model.js";
 import Position from "./position.model.js";
-//Julian's position changes end here
-
-
-//Julian's qualification model changes start here
 import Qualification_List from "./qualification_list.model.js";
 import Qualification from "./qualification.model.js";
-
-//Julian's qualification model changes end here
-
 
 const db = {};
 db.Sequelize = Sequelize;
@@ -30,8 +23,8 @@ db.session = Session;
 db.tutorial = Tutorial;
 db.lesson = Lesson;
 
+db.department_schedule = Department_Schedule;
 db.position = Position;
-
 db.qualification_list = Qualification_List;
 db.qualification = Qualification;
 
@@ -70,6 +63,8 @@ db.lesson.belongsTo(
   { as: "tutorial" },
   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
 );
+
+//Associations for Department_Schedules (to date time) needs to go here. 
 
 //position associations to qualification list, and department need to go here.
 //I'm deciding to not make a skeleton for them yet, since I can't realistically
