@@ -7,6 +7,8 @@ const NotificationList = SequelizeInstance.define("notification_list", {
       autoIncrement: true,
       primaryKey: true,
     },
+      
+    //a reminder for me to put references here - Julian
       employee_id: {
         type: Sequelize.INTEGER,
         allowNull: true,

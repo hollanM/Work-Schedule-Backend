@@ -61,12 +61,20 @@ db.lesson.belongsTo(
   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
 );
 
-// foreign key for notification
+// foreign key association for notification
 db.notificationList.hasMany(
   db.notification,
-  { as: "notification" },
+  { as: "notifications" },
   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
+
 );
+
+//Addition from Julian:
+db.notification.belongsTo(
+  db.notificationList,
+  {as: "notification_list"},
+  {foreignKey: {allowNull: false}, onDelete: "CASCADE"}
+)
 
 // foreign key for notification list
 // db.notificationList.belongsTo(
