@@ -5,6 +5,9 @@ import UserRoutes from "./user.routes.js";
 import TutorialRoutes from "./tutorial.routes.js";
 import LessonRoutes from "./lesson.routes.js";
 
+//Julian's task route changes start here!
+import TaskRoutes from "./task.routes.js";
+//Julian's task route changes end here!
 //Julian's CHANGES START HERE
 import ShiftRoutes from "./shift.routes.js";
 import ShiftTaskListRoutes from "./shift_task_list.routes.js";
@@ -39,5 +42,9 @@ router.use("/department_schedules", DepartmentScheduleRoutes);
 router.use("/positions", PositionRoutes);
 router.use("/qualifications", QualificationRoutes);
 router.use("/qualification_lists", QualificationListRoutes);
+
+//Julian's task route changes start here!
+router.use("/tasks", TaskRoutes);
+//Julian's task route changes end here!
 
 export default router;

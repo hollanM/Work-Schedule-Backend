@@ -20,6 +20,10 @@ import Position from "./position.model.js";
 import Qualification_List from "./qualification_list.model.js";
 import Qualification from "./qualification.model.js";
 
+//Julian's Task Model Changes begin here
+import Task from "./task.model.js";
+//Julian's Task Model Changes end here
+
 const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
@@ -29,6 +33,9 @@ db.session = Session;
 db.tutorial = Tutorial;
 db.lesson = Lesson;
 
+//Julian's Task Model Changes begin here
+db.task = Task;
+//Julian's Task Model Changes end here
 //Julian's CHANGES START HERE
 db.shift = Shift;
 db.shift_task_list = Shift_Task_List;
@@ -77,6 +84,8 @@ db.lesson.belongsTo(
   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
 );
 
+
+//Julian's Task Model Changes begin here
 
 //Julian's CHANGES START HERE
 //Foreign key assocations for Shift, Shift_Task_List, and Task models will be under here...
