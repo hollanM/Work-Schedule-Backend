@@ -29,6 +29,9 @@ const Manager_List = SequelizeInstance.define("manager_lists", {
         }
         */ 
     }
-  });
+  },
+{
+ timestamps: false //removes the updated at and created at columns in the database for this table
+});
    
 export default Manager_List;
