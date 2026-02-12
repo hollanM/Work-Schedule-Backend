@@ -23,7 +23,7 @@ exports.create = (req, res) => {
   logger.debug(`Creating Date_Time: ${Date_Time.id}`);
   
   // Save Date_Time in the database
-  Date_Time.create(Date_Time)
+  Date_Time.create(date_time)
     .then((data) => {
       logger.info(`Date_Time created successfully: ${data.id} - ${data.first_date_time} - ${Date_Time.second_date_time}`);
       res.send(data);
