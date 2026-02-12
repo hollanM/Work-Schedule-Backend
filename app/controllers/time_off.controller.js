@@ -17,10 +17,10 @@ exports.create = (req, res) => {
   // }
   // Create a Time_off
   const time_off = {
-    date_time_id: req.body.date_time_id ? req.body.date_time_id : null,
+    date_time_id: req.body.date_time_id,
     is_available: req.body.is_available, //these bools cannot be checked the same way, they get auto nulled
     is_approved: req.body.is_approved,
-    employee_id: req.body.employee_id ? req.body.employee_id : null,
+    employee_id: req.body.employee_id
   };
   logger.debug(time_off.body);
   

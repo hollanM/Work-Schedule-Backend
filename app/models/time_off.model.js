@@ -9,7 +9,8 @@ const Time_off = SequelizeInstance.define("time_offs", {
       },
     date_time_id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
+        defaultValue: null,
         /*
         references:{
             model: "date_times",
@@ -19,15 +20,18 @@ const Time_off = SequelizeInstance.define("time_offs", {
       },
     is_available: {
         type: Sequelize.BOOLEAN,
-        allowNull: false,
+        allowNull: true,
+        defaultValue: true,
       },
     is_approved: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
+        defaultValue: false,
       },
     employee_id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
+        defaultValue: null,
         /*
         references:{
             model: "employee",
