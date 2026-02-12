@@ -28,6 +28,9 @@ import PositionRoutes from "./position.routes.js";
 import QualificationRoutes from "./qualification.routes.js";
 import QualificationListRoutes from "./qualification_list.routes.js";
 
+//Juian's Manager List changes start here
+import ManagerListRoutes from "./manager_list.routes.js";
+//Julian's Manager List changes end here
 
 const router = Router();
 
@@ -52,5 +55,10 @@ router.use("/qualification_lists", QualificationListRoutes);
 //Julian's task route changes start here!
 router.use("/tasks", TaskRoutes);
 //Julian's task route changes end here!
+
+//Julian's Manager List changes start here
+router.use("/manager_lists", ManagerListRoutes);
+//Julian's Manager List changes end here
+
 
 export default router;

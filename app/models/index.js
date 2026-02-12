@@ -13,6 +13,10 @@ import Employee_list from "./employee_list.model.js";
 import Shift from "./shift.model.js";
 import Shift_Task_List from "./shift_task_list.model.js";
 
+//Julian's Manager Setting's Changes Start here
+import Manager_List from "./manager_list.model.js";
+//Julian's Manager Setting's Changes End here
+
 //Julian's Availability Changes start here
 import Availability from "./availability.model.js";
 //Julian's Availability Changes end here
@@ -54,6 +58,10 @@ db.position = Position;
 db.qualification_list = Qualification_List;
 db.qualification = Qualification;
 
+//Julian's Manager Setting's Changes Start here
+db.manager_list = Manager_List;
+//Julian's Manager Setting's Changes End here
+
 // foreign key for session
 db.user.hasMany(
   db.session,
@@ -90,6 +98,9 @@ db.lesson.belongsTo(
   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
 );
 
+//The associations for manager list
+//(employee, and department) will need to go here
+//so that the foreign keys in them work. 
 
 //Julian's Task Model Changes begin here
 
