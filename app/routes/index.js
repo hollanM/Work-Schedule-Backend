@@ -7,9 +7,9 @@ import LessonRoutes from "./lesson.routes.js";
 import Date_time from "./date_time.routes.js";
 import EmployeeRoutes from "./employee.routes.js";
 import EmployeeListRoutes from "./employee_list.routes.js";
+import ClockListRoutes from "./clock_list.routes.js";
+import ClockInOutRoutes from "./clock_in_out.routes.js";
 
-// Samuel Harris Changes - 2/11/2026 @ 2:30 PM
-// changed employeeList to employee_lists
 //Julian's task route changes start here!
 import TaskRoutes from "./task.routes.js";
 //Julian's task route changes end here!
@@ -20,9 +20,6 @@ import ShiftTaskListRoutes from "./shift_task_list.routes.js";
 //Julian's Availability Changes start here
 import AvailabilityRoutes from "./availability.routes.js";
 //Julian's Availability Changes end here
-
-
-
 
 import DepartmentScheduleRoutes from "./department_schedule.routes.js";
 import PositionRoutes from "./position.routes.js";
@@ -62,5 +59,7 @@ router.use("/tasks", TaskRoutes);
 router.use("/manager_lists", ManagerListRoutes);
 //Julian's Manager List changes end here
 
+router.use("/clock_lists", ClockListRoutes);
+router.use("/clock_in_outs", ClockInOutRoutes);
 
 export default router;
