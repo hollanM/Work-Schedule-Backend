@@ -8,6 +8,7 @@ import User from "./user.model.js";
 import Session from "./session.model.js";
 import Tutorial from "./tutorial.model.js";
 import Lesson from "./lesson.model.js"; 
+import Department from "./department.model.js";
 import Date_time from "./date_time.model.js"
 import Employee from "./employee.model.js"; 
 import Employee_list from "./employee_list.model.js"; 
@@ -45,6 +46,7 @@ db.user = User;
 db.session = Session;
 db.tutorial = Tutorial;
 db.lesson = Lesson;
+db.department = Department;
 db.date_time = Date_time;
 db.e = Tutorial;
 db.lesson = Lesson;
@@ -112,6 +114,52 @@ db.lesson.belongsTo(
   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
 );
 
+// foreign key for department
+// db.department.belongsTo(
+//   db.weekely_schedule,
+//   { as: "weekely_schedule" },
+//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
+// );
+// db.department.belongsTo(
+//   db.position,
+//   { as: "position" },
+//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
+// );
+// db.department.belongsTo(
+//   db.manager_list,
+//   { as: "manager_list" },
+//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
+// );
+// db.department.belongsTo(
+//   db.employee_list,
+//   { as: "employee_list" },
+//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
+// );
+// db.department.belongsTo(
+//   db.clock_list,
+//   { as: "clock_list" },
+//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
+// );
+// db.department.belongsTo(
+//   db.shift,
+//   { as: "shift" },
+//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
+// );
+// db.department.belongsTo(
+//   db.shift_task_list,
+//   { as: "shift_task_list" },
+//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
+// );
+// db.department.belongsTo(
+//   db.notification_list,
+//   { as: "notification_list" },
+//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
+// );
+// db.department_schedule.belongsTo(
+//   db.department,
+//   { as: "department" },
+//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
+// );
 
 // Exercise 1 <- many ExerciseDay
 Clock_List.hasMany(Clock_In_Out, {
