@@ -7,17 +7,15 @@ const In_app_settings = SequelizeInstance.define("in_app_settings", {
         autoIncrement: true,
         primaryKey: true,
       },
-    app_setting_1: {
+    emails: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
+        defaultValue: false,
       },
-    app_setting_2: {
+    text_messages: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
-      },
-    app_setting_3: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
+        defaultValue: false,
       },
       },
       {
