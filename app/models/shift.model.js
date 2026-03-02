@@ -27,7 +27,19 @@ const Shift = SequelizeInstance.define("shifts", {
     
     },
    //id of the date time associated with the shift (will need to be a nested query)
-   date_time_id:{
+   start_day_id:{
+    type: Sequelize.INTEGER,
+    allowNull: true, //you might want to set this as false later.
+    //foreign key constraint for date_times table
+    
+    references:{
+      model: "date_times",
+      key: "id",
+    }
+      
+   },
+
+   end_day_id:{
     type: Sequelize.INTEGER,
     allowNull: true, //you might want to set this as false later.
     //foreign key constraint for date_times table

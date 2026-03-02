@@ -132,6 +132,8 @@ Department.hasMany(Department_Schedule, { foreignKey: "department_id", as: "depa
 Department.hasMany(Weekly_Schedule, { foreignKey: "department_id", as: "weekly_schedules" });
 Department.hasMany(Clock_In_Out, { foreignKey: "department_id", as: "clock_in_outs" });
 Department.hasMany(Position, { foreignKey: "department_id", as: "positions" });
+Department.hasMany(Shift, { foreignKey: "department_id", as: "shifts" });
+Department.hasMany(Shift_Task_List, { foreignKey: "department_id", as: "shift_task_lists" });
 //Department Associations end here
 
 //Position Associations start here
@@ -140,7 +142,29 @@ Position.belongsTo(Qualification_List, { foreignKey: "qualification_list_id", as
 //Position Associations end here
 
 //Shift Associations start here
+Shift.belongsTo(Department, { foreignKey: "department_id", as: "departments" });  
+Shift.belongsTo(Position, { foreignKey: "position_id", as: "positions" });
+Shift.belongsTo(Weekly_Schedule, { foreignKey: "weekly_schedule_id", as: "weekly_schedules" });
+Shift.belongsTo(Employee, { foreignKey: "employee_id", as: "employees" });
+Shift.belongsTo(Date_time, { foreignKey: "start_day_id", as: "start_date_times" });
+Shift.belongsTo(Date_time, { foreignKey: "end_day_id", as: "end_date_times" });
+Shift.belongsTo(Shift_Task_List, { foreignKey: "shift_task_list_id", as: "shift_task_lists" });
+//Shift Associations end here
 
+//Availability Associations start here
+Availability.belongsTo(Employee, { foreignKey: "employee_id", as: "employees" });
+Availability.belongsTo(Date_time, { foreignKey: "start_day_id", as: "start_date_times" });
+Availability.belongsTo(Date_time, { foreignKey: "end_day_id", as: "end_date_times" });
+//Availability Associations end here
 
+//Task Associations start here
+Task.belongsTo(Shift_Task_List, { foreignKey: "shift_task_list_id", as: "shift_task_lists" });
+//Task Associations end here
+
+//Shift_Task_List Associations start here
+Shift_Task_List.hasMany(Task, { foreignKey: "shift_task_list_id", as: "tasks" });
+Shift_Task_List.hasMany(Shift, { foreignKey: "shift_task_list_id", as: "shifts" });
+Shift_Task_List.belongsTo(Department, { foreignKey: "department_id", as: "departments" });
+//Shift_Task_List Associations end here
 
 export default db;
