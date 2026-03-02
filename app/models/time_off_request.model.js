@@ -34,7 +34,7 @@ const Time_Off_Requests = SequelizeInstance.define("time_off_requests", {
         defaultValue: null,
         
         references:{
-            model: "employee",
+            model: "employees",
             key: "id",
         }   
         
