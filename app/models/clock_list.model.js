@@ -12,24 +12,24 @@ const Clock_List = SequelizeInstance.define("clock_list", {
         allowNull: true,
         defaultValue: null,
         //foreign key constraint for employees table
-        /*
+        
         references:{
             model: "employees",
             key: "id",
         }
-        */
+        
     },
     department_id:{
         type: Sequelize.INTEGER,
         allowNull: true,
         defaultValue: null,
         //foreign key constraint for employees table
-        /*
+        
         references:{
             model: "departments",
             key: "id",
         }
-        */
+        
     }
   });
    

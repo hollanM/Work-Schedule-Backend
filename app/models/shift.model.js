@@ -19,72 +19,72 @@ const Shift = SequelizeInstance.define("shifts", {
       type: Sequelize.INTEGER,
       allowNull: true, //employees can be null, since a shift can be unassigned.
       //foreign key reference to employees table
-      /*
+      
       references: {
         model: "employees",
         key: "id",
     },
-    */
+    
     },
    //id of the date time associated with the shift (will need to be a nested query)
    date_time_id:{
-    type: Sequelize.DATE,
+    type: Sequelize.INTEGER,
     allowNull: true, //you might want to set this as false later.
     //foreign key constraint for date_times table
-    /*
+    
     references:{
       model: "date_times",
       key: "id",
     }
-      */
+      
    },
    position_id:{
     type: Sequelize.INTEGER,
     allowNull: true,
     //foreign key constraint for positions table
-    /*
+    
     references:{
       model: "positions",
       key: "id",
     }
-      */
+      
    },
    shift_task_list_id:{
     type: Sequelize.INTEGER,
     allowNull: true,
     
     //foreign key constraint for shift_task_lists table
-   /* 
+   
     references:{
       model: "shift_task_lists",
       key: "id",
     }
 
-    */
+    
    },
    department_id:{
     type: Sequelize.INTEGER,
     allowNull: true,
     
     //foreign key constraint for shift_task_lists table
-   /* 
+   
     references:{
       model: "shift_task_lists",
       key: "id",
     }
 
-    */
+    
    },
    weekly_schedule_id:{
     type: Sequelize.INTEGER,
     allowNull: true,
     //foreign key constraint for weekly_schedules table
-    /*
+    
     references:{
       model: "weekly_schedules",
       key: "id",
     }
-      */
+    
    },
    //this is the end of the foreign key references. 
    //Below this are all the other non foriegn key attributes of the shift model.

@@ -17,12 +17,12 @@ const Qualification = SequelizeInstance.define("qualifications", {
         type: Sequelize.INTEGER,
         allowNull: true,
         //foreign key reference to employees table
-        /*
+        
         references: {
             model: "employees",
             key: "id",
         },
-        */
+        
     },
     qualification_list_id:{
         type: Sequelize.INTEGER,

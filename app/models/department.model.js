@@ -14,12 +14,12 @@ const Department = SequelizeInstance.define("departments", {
     department_schedule: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        /*
+        
         references:{
-            model: "department_schedule",
+            model: "department_schedules",
             key: "id",
         }   
-        */
+        
       },
     break_time_allotted: {
         type: Sequelize.INTEGER,

@@ -20,6 +20,8 @@ const User = SequelizeInstance.define("user", {
     type: Sequelize.STRING,
     allowNull: false,
   },
+  //-From Julian: I'm not sure what this is, or why it's here,
+  //so I'm not touching it. 
   // refresh_token: {
   //   type: Sequelize.STRING(512),
   //   allowNull: true

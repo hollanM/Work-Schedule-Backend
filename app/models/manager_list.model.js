@@ -11,23 +11,23 @@ const Manager_List = SequelizeInstance.define("manager_lists", {
       type: Sequelize.INTEGER,
       allowNull: true,
       defaultValue: null,
-      /*
+      
         references: {
             model: 'employees',
             key: 'id'
         }
-        */ 
+        
     },
         department_id: {
       type: Sequelize.INTEGER,
       allowNull: true,
       defaultValue: null,
-      /*
+      
         references: {
             model: 'departments',
             key: 'id'
         }
-        */ 
+        
     }
   },
 {

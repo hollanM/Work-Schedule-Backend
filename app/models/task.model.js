@@ -20,13 +20,13 @@ const Task = SequelizeInstance.define("tasks", {
     allowNull: true,
     
     //foreign key constraint for shift_task_lists table
-   /* 
+   
     references:{
       model: "shift_task_lists",
       key: "id",
     }
 
-    */
+    
    },
    
    //this is the end of the foreign key references. 
