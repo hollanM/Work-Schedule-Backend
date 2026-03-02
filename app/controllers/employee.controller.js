@@ -23,8 +23,7 @@ exports.create = (req, res) => {
     pay_rate: req.body.pay_rate, 
     clocked_in: req.body.clocked_in ? req.body.clocked_in : false, 
     has_qualification_list_id: req.body.has_qualification_list_id, 
-    app_settings_id: req.body.app_settings_id, 
-    preferred_work_time_id: req.body.preferred_work_time_id
+    in_app_settings_id: req.body.in_app_settings_id, 
   };
   
   logger.debug(`Creating employee: ${employee.name} `);

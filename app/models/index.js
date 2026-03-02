@@ -40,6 +40,7 @@ import Task from "./task.model.js";
 //Julian's Clock list and clock in out changes start here
 import Clock_List from "./clock_list.model.js";
 import Clock_In_Out from "./clock_in_out.model.js";
+import In_App_Settings from "./in_app_settings.model.js";
 //Julian's Clock list and clock in out changes end here 
 
 
@@ -85,6 +86,8 @@ db.manager_list = Manager_List;
 
 db.clock_list = Clock_List;
 db.clock_in_out = Clock_In_Out;
+
+db.in_app_settings = In_App_Settings;
 
 
 
@@ -166,5 +169,68 @@ Shift_Task_List.hasMany(Task, { foreignKey: "shift_task_list_id", as: "tasks" })
 Shift_Task_List.hasMany(Shift, { foreignKey: "shift_task_list_id", as: "shifts" });
 Shift_Task_List.belongsTo(Department, { foreignKey: "department_id", as: "departments" });
 //Shift_Task_List Associations end here
+
+//Notification Associations start here
+Notification.belongsTo(NotificationList, { foreignKey: "notification_list_id", as: "notification_lists" });
+//Notification Associations end here
+
+//Notification List Associations start here
+NotificationList.belongsTo(Employee, { foreignKey: "employee_id", as: "employees" });
+NotificationList.belongsTo(Department, { foreignKey: "department_id", as: "departments" });
+NotificationList.hasMany(Notification, { foreignKey: "notification_list_id", as: "notifications" });
+//Notification List Associations end here
+
+//Qualification List Associations start here
+  //Once again, this represents where qualification list is represented as a foreign key in that table. 
+Qualification_List.hasMany(Position, { foreignKey: "qualification_list_id", as: "positions" });
+Qualification_List.hasMany(Qualification, { foreignKey: "qualification_list_id", as: "qualifications" });
+Qualification_List.belongsTo(Employee, { foreignKey: "employee_id", as: "employees" });
+//Qualification List Associations end here
+
+//Qualification Associations start here
+Qualification.belongsTo(Employee, { foreignKey: "employee_id", as: "employees" });
+Qualification.belongsTo(Qualification_List, { foreignKey: "qualification_list_id", as: "qualification_lists" });
+//Qualification Associations end here
+
+//Date_Time Associations start here
+Date_time.hasMany(Shift, { foreignKey: "start_day_id", as: "start_day_times" });
+Date_time.hasMany(Shift, { foreignKey: "end_day_id", as: "end_day_times" });
+Date_time.hasMany(Department_Schedule, { foreignKey: "su_schedule", as: "su_schedule_times" });
+Date_time.hasMany(Department_Schedule, { foreignKey: "mo_schedule", as: "mo_schedule_times" });
+Date_time.hasMany(Department_Schedule, { foreignKey: "tu_schedule", as: "tu_schedule_times" });
+Date_time.hasMany(Department_Schedule, { foreignKey: "we_schedule", as: "we_schedule_times" });
+Date_time.hasMany(Department_Schedule, { foreignKey: "th_schedule", as: "th_schedule_times" });
+Date_time.hasMany(Department_Schedule, { foreignKey: "fr_schedule", as: "fr_schedule_times" });
+Date_time.hasMany(Department_Schedule, { foreignKey: "sa_schedule", as: "sa_schedule_times" });
+Date_time.hasMany(Availability, { foreignKey: "start_day_id", as: "availability_start_times" });
+Date_time.hasMany(Availability, { foreignKey: "end_day_id", as: "availability_end_times" });
+Date_time.hasMany(Weekly_Schedule, { foreignKey: "start_day_id", as: "weekly_schedule_start_times" });
+Date_time.hasMany(Weekly_Schedule, { foreignKey: "end_day_id", as: "weekly_schedule_end_times" });
+//Date_Time Associations end here
+
+
+//Time off request associations start here
+Time_Off_Request.belongsTo(Employee, { foreignKey: "employee_id", as: "employees" });
+Time_Off_Request.belongsTo(Date_time, { foreignKey: "start_time_id", as: "start_times" });
+Time_Off_Request.belongsTo(Date_time, { foreignKey: "end_time_id", as: "end_times" });
+//Time off request associations end here
+
+//Employee Associations start here
+
+  //All the things that use employee as a foreign key go here.
+Employee.hasMany(Time_Off_Request, { foreignKey: "employee_id", as: "time_off_requests" });
+Employee.hasMany(Availability, { foreignKey: "employee_id", as: "availabilities" });
+Employee.hasMany(Shift, { foreignKey: "employee_id", as: "shifts" });
+Employee.hasMany(Employee_List, { foreignKey: "employee_id", as: "employee_lists" });
+Employee.hasMany(Manager_List, { foreignKey: "employee_id", as: "manager_lists" });
+Employee.hasMany(NotificationList, { foreignKey: "employee_id", as: "notification_lists" });
+Employee.hasMany(Qualification_List, { foreignKey: "employee_id", as: "qualification_lists" });
+Employee.hasMany(Clock_In_Out, { foreignKey: "employee_id", as: "clock_in_outs" });
+Employee.hasMany(In_App_Settings, { foreignKey: "employee_id", as: "in_app_settings" });
+//Employee Associations end here
+
+//In_App_Settings Associations start here
+In_App_Settings.belongsTo(Employee, { foreignKey: "employee_id", as: "employees" });
+//In_App_Settings Associations end here
 
 export default db;

@@ -12,10 +12,20 @@ const NotificationList = SequelizeInstance.define("notification_lists", {
       employee_id: {
         type: Sequelize.INTEGER,
         allowNull: true,
+        defaultValue: null,
+        references: {
+          model: "employees",
+          key: "id",
+        },
       },
       department_id: {
         type: Sequelize.INTEGER,
         allowNull: true,
+        defaultValue: null,
+            references: {
+            model: "departments",   
+            key: "id",
+        },
       },
   });
 

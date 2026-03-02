@@ -14,6 +14,17 @@ const Qualification_List = SequelizeInstance.define("qualification_lists", {
       allowNull: true,
       defaultValue: null,
     },
+       employee_id:{
+            type: Sequelize.INTEGER,
+            allowNull: true,
+            //foreign key reference to employees table
+            
+            references: {
+                model: "employees",
+                key: "id",
+            },
+            
+        },
   });
    
 export default Qualification_List;

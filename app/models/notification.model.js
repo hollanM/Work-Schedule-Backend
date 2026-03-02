@@ -1,7 +1,7 @@
 import Sequelize from "sequelize";
 import SequelizeInstance from "../config/sequelizeInstance.js";
 
-const Notification = SequelizeInstance.define("notification", {
+const Notification = SequelizeInstance.define("notifications", {
     id: {
       type: Sequelize.INTEGER,
       autoIncrement: true,
@@ -38,7 +38,7 @@ const Notification = SequelizeInstance.define("notification", {
       allowNull: true,
       defaultValue: null
     },
-    notificationListId: {
+    notification_list_id: {
       // foreign key to NotificationList 
       type: Sequelize.INTEGER,
 

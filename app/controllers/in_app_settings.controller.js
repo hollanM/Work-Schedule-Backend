@@ -17,9 +17,9 @@ exports.create = (req, res) => {
   // }
   // Create a In_app_settings
   const in_app_settings = {
-    app_setting_1: req.body.app_setting_1,//cant do the null check here with bools
-    app_setting_2: req.body.app_setting_2,
-    app_setting_3: req.body.app_setting_3,
+    text_messges: req.body.text_messges,
+    email: req.body.email,
+    employee_id: req.body.employee_id
   };
   logger.debug(in_app_settings.body);
   

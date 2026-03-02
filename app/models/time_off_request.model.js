@@ -7,17 +7,25 @@ const Time_Off_Requests = SequelizeInstance.define("time_off_requests", {
         autoIncrement: true,
         primaryKey: true,
       },
-    date_time_id: {
+    start_time_id:{
         type: Sequelize.INTEGER,
         allowNull: true,
         defaultValue: null,
-        
         references:{
             model: "date_times",
             key: "id",
-        }   
+        }
+    },
+    end_time_id:{
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        defaultValue: null,
+        references:{
+            model: "date_times",
+            key: "id",
+        }
         
-      },
+    },
     is_available: {
         type: Sequelize.BOOLEAN,
         allowNull: true,

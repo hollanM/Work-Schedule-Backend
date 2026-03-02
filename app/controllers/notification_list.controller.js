@@ -1,7 +1,7 @@
 import db  from "../models/index.js";
 import logger from "../config/logger.js";
 
-const NotificationList = db.notificationList;
+const NotificationList = db.notification_list;
 const Op = db.Sequelize.Op;
 const exports = {};
 // Create and Save a new NotificationList
@@ -9,8 +9,8 @@ exports.create = (req, res) => {
   // Create a NotificationList
   // Create a NotificationList
   const notification_list = {
-    employee_id: req.body.employee_id || null,
-    department_id: req.body.department_id || null,
+    employee_id: req.body.employee_id,
+    department_id: req.body.department_id,
   };
   
   logger.debug(`Creating notification_list: ${JSON.stringify(notification_list)}`);

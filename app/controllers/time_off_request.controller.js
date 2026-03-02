@@ -1,7 +1,7 @@
 import db  from "../models/index.js";
 import logger from "../config/logger.js";
 
-const Time_off = db.time_off;
+const Time_off = db.time_off_request;
 const Op = db.Sequelize.Op;
 const exports = {};
 
@@ -17,14 +17,15 @@ exports.create = (req, res) => {
   // }
   // Create a Time_off
   const time_off = {
-    date_time_id: req.body.date_time_id,
+    start_time_id: req.body.start_time_id,
+    end_time_id: req.body.end_time_id,
     is_available: req.body.is_available, //these bools cannot be checked the same way, they get auto nulled
     is_approved: req.body.is_approved,
     employee_id: req.body.employee_id
   };
   logger.debug(time_off.body);
   
-  logger.debug(`Creating Time_off: ${Time_off.body}`);
+  logger.debug(`Creating Time_off...}`);
   
   // Save Time_off in the database
   Time_off.create(time_off)
