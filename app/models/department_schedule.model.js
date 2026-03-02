@@ -91,6 +91,15 @@ const Department_Schedule = SequelizeInstance.define("department_schedules", {
             key: "id"
         }
       
+    },
+    department_id:{
+      type: Sequelize.INTEGER,
+      allowNull: true,
+      defaultValue: null,
+      references: {
+        model: "departments",
+        key: "id",  
+      }
     }
   });
    

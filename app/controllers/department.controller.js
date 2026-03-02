@@ -17,9 +17,8 @@ exports.create = (req, res) => {
   // }
   // Create a Department
   const department = {
-    name: req.body.name ? req.body.name : null,
-    department_schedule: req.body.department_schedule ? req.body.department_schedule : null,
-    break_time_allotted: req.body.break_time_allotted ? req.body.break_time_allotted : null,
+    name: req.body.name,
+    break_time_allotted: req.body.break_time_allotted 
   };
   logger.debug(department.body);
   

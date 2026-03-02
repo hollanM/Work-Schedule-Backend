@@ -15,6 +15,7 @@ exports.create = (req, res) => {
     th_schedule: req.body.th_schedule,
     fr_schedule: req.body.fr_schedule,
     sa_schedule: req.body.sa_schedule,
+    department_id: req.body.department_id,
   };
   
   logger.debug(`Creating department_schedule:...`);

@@ -9,21 +9,13 @@ const Department = SequelizeInstance.define("departments", {
       },
     name: {
         type: Sequelize.STRING,
-        allowNull: false,
-      },
-    department_schedule: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        
-        references:{
-            model: "department_schedules",
-            key: "id",
-        }   
-        
+        allowNull: true,
+        defaultValue: "",
       },
     break_time_allotted: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
+        defaultValue: null,
       },
       },
       {
