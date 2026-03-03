@@ -12,7 +12,7 @@ exports.create = (req, res) => {
     start_date_id: req.body.start_date_id,
     end_date_id: req.body.end_date_id,
     is_template: req.body.is_template,
-    department: req.body.department,
+    department_id: req.body.department_id,
   };
   
   logger.debug(`Creating Weekly_Schedule...`);
