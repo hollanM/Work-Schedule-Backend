@@ -8,7 +8,7 @@ import db  from "./app/models/index.js";
 import logger from "./app/config/logger.js";
 
 db.sequelize.sync();
-
+//comment
 const app = express();
 
 // HTTP request logger middleware
