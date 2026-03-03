@@ -18,7 +18,7 @@ exports.create = (req, res) => {
   // Create a Notification
   const notification = {
     notification_list_id: req.body.notificationListId || req.body.notificationList_id || req.params.notificationListId || req.body.notification_list_id || null,
-    userId: req.body.userId || null,
+    //userId: req.body.userId || req.body.user_id ||null, (notification doesn't have a user id)
     title: req.body.title,
     description: req.body.description,
     to: req.body.to,
