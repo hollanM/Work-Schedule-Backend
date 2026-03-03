@@ -17,7 +17,7 @@ exports.create = (req, res) => {
   // Create a Employee_list
   const employee_list = {
     employee_id: req.body.employee_id, 
-    department: req.body.department,
+    department_id: req.body.department_id,
   };
   
   logger.debug(`Creating employee_list: ${employee_list.employee_id} for user: ${employee_list.userId}`);

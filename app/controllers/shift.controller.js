@@ -11,7 +11,8 @@ exports.create = (req, res) => {
   const shift = {
     //please tell me how to turn suggestions off :(
     employee_id: req.body.employee_id,
-    date_time_id: req.body.date_time_id,
+    start_day_id: req.body.start_day_id,
+    end_day_id: req.body.end_day_id,
     position_id: req.body.position_id,
     shift_task_list_id: req.body.shift_task_list_id,
     weekly_schedule_id: req.body.weekly_schedule_id,

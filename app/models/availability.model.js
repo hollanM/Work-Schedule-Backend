@@ -13,41 +13,39 @@ const Availability = SequelizeInstance.define("availabilities", {
         defaultValue: 'unset',
         allowNull: false,
     },
-    date_start_time_id: {
+    start_day_id: {
       type: Sequelize.INTEGER,
       allowNull: true,
       defaultValue: null,     
       //foreign key reference to date_times table
-      /*
+      
       references:{
             model: "date_times",
             key: "id",
         }
-        */
+        
     },    
-    date_end_time_id:{
-        type: Sequelize.INTEGER,
-        allowNull: true,
-      defaultValue: null,   
-        //foreign key reference to date_times table
-        /*
-        references:{
+    end_day_id: {
+      type: Sequelize.INTEGER,
+      allowNull: true,
+      defaultValue: null,     
+      //foreign key reference to date_times table
+      references:{
             model: "date_times",
             key: "id",
-        }   
-        */
-    },
+        }
+      },
     employee_id:{
         type: Sequelize.INTEGER,
         allowNull: true,
         defaultValue: null,
         //foreign key reference to employees table
-        /*
+        
         references: {
             model: "employees",
             key: "id",
         },
-        */
+        
     }
   });
    

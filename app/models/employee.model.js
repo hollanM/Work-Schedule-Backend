@@ -23,15 +23,6 @@ const Employee = SequelizeInstance.define("employee", {
     clocked_in: {
       type: Sequelize.BOOLEAN,
     },
-    has_qualification_list_id: {
-      type: Sequelize.INTEGER,
-    },
-    app_settings_id: {
-      type: Sequelize.INTEGER,
-    },
-    preferred_work_time_id: {
-      type: Sequelize.INTEGER,
-    },
   });
    
 export default Employee;

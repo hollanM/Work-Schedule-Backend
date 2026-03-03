@@ -14,12 +14,12 @@ const Shift_Task_List = SequelizeInstance.define("shift_task_lists", {
     allowNull: true,
     defaultValue: null,
     //foreign key constraint for departments table
-   /*
+   
     references:{
       model: "departments",
       key: "id",    
     }
-      */
+      
    }
   });
 

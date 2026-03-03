@@ -27,9 +27,16 @@ import PositionRoutes from "./position.routes.js";
 import QualificationRoutes from "./qualification.routes.js";
 import QualificationListRoutes from "./qualification_list.routes.js";
 
+import TimeOffRequestRoutes from "./time_off_request.routes.js";
+
 //Juian's Manager List changes start here
 import ManagerListRoutes from "./manager_list.routes.js";
 //Julian's Manager List changes end here
+
+import WeeklyScheduleRoutes from "./weekly_schedule.routes.js";
+import NotificationRoutes from "./notification.routes.js";
+import NotificationListRoutes from "./notification_list.routes.js";
+import In_App_SettingsRoutes from "./in_app_settings.routes.js";
 
 const router = Router();
 
@@ -52,6 +59,9 @@ router.use("/department_schedules", DepartmentScheduleRoutes);
 router.use("/positions", PositionRoutes);
 router.use("/qualifications", QualificationRoutes);
 router.use("/qualification_lists", QualificationListRoutes);
+router.use("/weekly_schedules", WeeklyScheduleRoutes);
+router.use("/time_off_requests", TimeOffRequestRoutes);
+
 
 //Julian's task route changes start here!
 router.use("/tasks", TaskRoutes);
@@ -63,5 +73,8 @@ router.use("/manager_lists", ManagerListRoutes);
 
 router.use("/clock_lists", ClockListRoutes);
 router.use("/clock_in_outs", ClockInOutRoutes);
+router.use("/notifications", NotificationRoutes);
+router.use("/notification_lists", NotificationListRoutes);
+router.use("/in_app_settings", In_App_SettingsRoutes);
 
 export default router;
