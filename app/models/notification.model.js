@@ -42,8 +42,8 @@ const Notification = SequelizeInstance.define("notifications", {
       // foreign key to NotificationList 
       type: Sequelize.INTEGER,
 
-    
-      allowNull: false,
+    defaultValue: null,
+      allowNull: true,
       //added a references to notification list here,
       //that way the database will make sure its a valid
       //id :) (Julian)
@@ -52,6 +52,7 @@ const Notification = SequelizeInstance.define("notifications", {
           key: "id"
       }
     },
+    
   });
 
 export default Notification;
