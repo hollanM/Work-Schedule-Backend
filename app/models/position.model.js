@@ -34,12 +34,12 @@ const Position = SequelizeInstance.define("positions", {
         allowNull: true,
         defaultValue: null,
         //foreign key reference to departments table
-        /*
+        
         references: {
             model: "departments",
             key: "id",
         },
-        */
+        
     }
   });
    

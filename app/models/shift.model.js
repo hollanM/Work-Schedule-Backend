@@ -119,7 +119,13 @@ const Shift = SequelizeInstance.define("shifts", {
     type: Sequelize.BOOLEAN,
     allowNull: true,
     defaultValue: false,//most shifts start with the employee not on break.
-  }
+  },
+
+  color:{
+    type: Sequelize.STRING,
+    allowNull: true,
+    defaultValue: null,
+  },
   });
 
 export default Shift;
