@@ -8,6 +8,11 @@ const Shift_Task_List = SequelizeInstance.define("shift_task_lists", {
       autoIncrement: true,
       primaryKey: true,
     },
+    name:{
+      type: Sequelize.STRING,
+      allowNull: true,
+      defultValue: ""
+    },
     //-----FOREIGN KEY ATTRIBUTES FIRST-----
    department_id:{
     type: Sequelize.INTEGER,
