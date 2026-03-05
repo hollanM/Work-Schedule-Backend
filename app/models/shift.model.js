@@ -1,6 +1,7 @@
 import Sequelize from "sequelize";
 import SequelizeInstance from "../config/sequelizeInstance.js";
 
+//this comment exists for another merge!
 const Shift = SequelizeInstance.define("shifts", {
     //primary key for the table
     id: {
