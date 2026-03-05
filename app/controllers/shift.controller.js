@@ -17,6 +17,7 @@ exports.create = (req, res) => {
     shift_task_list_id: req.body.shift_task_list_id,
     weekly_schedule_id: req.body.weekly_schedule_id,
     department_id: req.body.department_id,
+    qualification_list_id: req.body.qualification_list_id,
     color: req.body.color,
 
     //non id fields
