@@ -98,6 +98,18 @@ const Shift = SequelizeInstance.define("shifts", {
     }
     
    },
+
+      qualification_list_id:{
+    type: Sequelize.INTEGER,
+    allowNull: true,
+    //foreign key constraint for weekly_schedules table
+    
+    references:{
+      model: "qualification_lists",
+      key: "id",
+    }
+    
+   },
    //this is the end of the foreign key references. 
    //Below this are all the other non foriegn key attributes of the shift model.
    open_to_take:{
@@ -119,7 +131,13 @@ const Shift = SequelizeInstance.define("shifts", {
     type: Sequelize.BOOLEAN,
     allowNull: true,
     defaultValue: false,//most shifts start with the employee not on break.
-  }
+  },
+
+  color:{
+    type: Sequelize.STRING,
+    allowNull: true,
+    defaultValue: null,
+  },
   });
 
 export default Shift;

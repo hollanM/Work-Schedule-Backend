@@ -11,6 +11,7 @@ exports.create = (req, res) => {
   const shift_task_list = {
     //please tell me how to turn suggestions off :(
     department_id: req.body.department_id,
+    name: req.body.name || "",
   };
   
   logger.debug(`Creating Shift_Task_List...`);

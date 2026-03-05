@@ -152,6 +152,7 @@ Shift.belongsTo(Employee, { foreignKey: "employee_id", as: "employees" });
 Shift.belongsTo(Date_time, { foreignKey: "start_day_id", as: "start_date_times" });
 Shift.belongsTo(Date_time, { foreignKey: "end_day_id", as: "end_date_times" });
 Shift.belongsTo(Shift_Task_List, { foreignKey: "shift_task_list_id", as: "shift_task_lists" });
+Shift.belongsTo(Qualification_List, { foreignKey: "qualification_list_id", as: "qualification_lists" });
 //Shift Associations end here
 
 //Availability Associations start here
@@ -184,6 +185,7 @@ NotificationList.hasMany(Notification, { foreignKey: "notification_list_id", as:
   //Once again, this represents where qualification list is represented as a foreign key in that table. 
 Qualification_List.hasMany(Position, { foreignKey: "qualification_list_id", as: "positions" });
 Qualification_List.hasMany(Qualification, { foreignKey: "qualification_list_id", as: "qualifications" });
+Qualification_List.hasMany(Shift, { foreignKey: "qualification_list_id", as: "shifts" });
 Qualification_List.belongsTo(Employee, { foreignKey: "employee_id", as: "employees" });
 //Qualification List Associations end here
 
