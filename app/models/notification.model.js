@@ -17,16 +17,38 @@ const Notification = SequelizeInstance.define("notifications", {
       allowNull: false,
       defaultValue: ""
     },
+    type: {
+      type: Sequelize.ENUM(
+        "timeOffRequests",
+        "swapDropRequests",
+        "openShiftRequests",
+        "scheduleUpdates",
+        "newUserRegistrations",
+        "availabilityChange",
+        "clockInOutReminders",
+        "overtimeAlerts",
+        "payrollReminders",
+        "reports",
+        "workplaceAlerts",
+        "shiftReminder"
+      ),
+      allowNull: false,
+      defaultValue: ""
+    },
     to: {
       type: Sequelize.STRING,
       allowNull: false,
       defaultValue: ""
     },
-    type: {
-      // Learn for Enum
-      type: Sequelize.ENUM("email", "text"),
+    email_pref: {
+      type: Sequelize.BOOLEAN,
       allowNull: false,
-      defaultValue: "text"
+      defaultValue: "false"
+    },
+    mobile_pref: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: "false"
     },
     is_read: {
       type: Sequelize.BOOLEAN,
