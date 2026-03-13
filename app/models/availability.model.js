@@ -35,14 +35,14 @@ const Availability = SequelizeInstance.define("availabilities", {
             key: "id",
         }
       },
-    employee_id:{
+    user_id:{
         type: Sequelize.INTEGER,
         allowNull: true,
         defaultValue: null,
         //foreign key reference to employees table
         
         references: {
-            model: "employees",
+            model: "users",
             key: "id",
         },
         

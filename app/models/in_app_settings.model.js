@@ -17,10 +17,14 @@ const In_app_settings = SequelizeInstance.define("in_app_settings", {
         allowNull: false,
         defaultValue: false,
       },
-      employee_id: {
+      users_id: {
               type: Sequelize.INTEGER,
               allowNull: true,
               defaultValue: null,
+              references:{
+                model: "users",
+                key: "id"
+              }
               
             },
       },
