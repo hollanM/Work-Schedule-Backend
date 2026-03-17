@@ -195,7 +195,6 @@ Time_Off_Request.belongsTo(Date_time, { foreignKey: "end_time_id", as: "end_time
 //Time off request associations end here
 
 //User Associations start here
-In_App_Settings.belongsTo(User, {foreignKey: "user_id", as: "users"})
 
   //All the things that use User as a foreign key go here.
 User.hasMany(Time_Off_Request, { foreignKey: "user_id", as: "time_off_requests" });
