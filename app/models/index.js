@@ -83,7 +83,6 @@ db.in_app_settings = In_App_Settings;
 // foreign key for session
 
 //Clock_In_Out foreign key associations start here
-Clock_In_Out.belongsTo(User, { foreignKey: "user_id", as: "users" });
 Clock_In_Out.belongsTo(Department, { foreignKey: "department_id", as: "departments" });
 //Clock_In_Out foreign key associations end here  
 
