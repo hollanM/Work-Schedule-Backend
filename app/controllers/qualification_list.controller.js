@@ -8,6 +8,7 @@ const exports = {};
 exports.create = (req, res) => {
   // Create a Qualification_List
   const qualification_list = {
+    user_id: req.body.user_id,
     qualification_description: req.body.qualification_description,
   };
   

@@ -21,7 +21,7 @@ exports.create = (req, res) => {
     end_time_id: req.body.end_time_id,
     is_available: req.body.is_available, //these bools cannot be checked the same way, they get auto nulled
     is_approved: req.body.is_approved,
-    employee_id: req.body.employee_id
+    user_id: req.body.user_id
   };
   logger.debug(time_off.body);
   
