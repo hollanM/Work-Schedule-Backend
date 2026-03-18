@@ -166,7 +166,6 @@ Qualification_List.belongsTo(User, { foreignKey: "user_id", as: "users" });
 //Qualification List Associations end here
 
 //Qualification Associations start here
-Qualification.belongsTo(User, { foreignKey: "user_id", as: "users" });
 Qualification.belongsTo(Qualification_List, { foreignKey: "qualification_list_id", as: "qualification_lists" });
 //Qualification Associations end here
 
