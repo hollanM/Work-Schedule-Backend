@@ -139,6 +139,12 @@ const Shift = SequelizeInstance.define("shifts", {
     allowNull: true,
     defaultValue: null,
   },
+  published:{
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  }
+  
   });
 
 export default Shift;
