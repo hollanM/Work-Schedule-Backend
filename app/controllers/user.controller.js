@@ -21,6 +21,13 @@ exports.create = (req, res) => {
     fName: req.body.fName,
     lName: req.body.lName,
     email: req.body.email,
+    department_id: req.body.department_id,
+    role: req.body.role,
+    oc_id: req.body.oc_id,
+    phone_num: req.body.phone_num,
+    clocked_in: req.body.clocked_num,
+    pay_rate: req.body.pay_rate
+
     // refresh_token: req.body.refresh_token,
     // expiration_date: req.body.expiration_date
   };

@@ -36,13 +36,13 @@ const Time_Off_Requests = SequelizeInstance.define("time_off_requests", {
         allowNull: false,
         defaultValue: false,
       },
-    employee_id: {
+    user_id: {
         type: Sequelize.INTEGER,
         allowNull: true,
         defaultValue: null,
         
         references:{
-            model: "employees",
+            model: "users",
             key: "id",
         }   
         

@@ -16,13 +16,13 @@ const Shift = SequelizeInstance.define("shifts", {
     in my branch they don't exist yet. They will need
     to be uncommented when the other models are created.
      */
-    employee_id: {
+    user_id: {
       type: Sequelize.INTEGER,
       allowNull: true, //employees can be null, since a shift can be unassigned.
       //foreign key reference to employees table
       
       references: {
-        model: "employees",
+        model: "users",
         key: "id",
     },
     
