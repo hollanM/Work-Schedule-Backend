@@ -9,7 +9,7 @@ exports.create = (req, res) => {
 
   // Create a Task
   const task = {
-   shift_task_list_id: req.params.shift_task_list_id,
+   shift_task_list_id: req.body.shift_task_list_id,
    status: req.body.status,
     description: req.body.description,
     name: req.body.name,

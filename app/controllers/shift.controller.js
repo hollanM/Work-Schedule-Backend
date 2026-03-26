@@ -20,11 +20,13 @@ exports.create = (req, res) => {
     qualification_list_id: req.body.qualification_list_id,
     color: req.body.color,
 
+
     //non id fields
     open_to_take: req.body.open_to_take || false,
     swap_history: req.body.swap_history || "",
     is_template: req.body.is_template || false,
     has_gone_on_break: req.body.has_gone_on_break || false,
+    published: req.body.published || false
   };
   
   logger.debug(`Creating Shift...`);
