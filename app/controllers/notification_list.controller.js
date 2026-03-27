@@ -9,7 +9,7 @@ exports.create = (req, res) => {
   // Create a NotificationList
   // Create a NotificationList
   const notification_list = {
-    employee_id: req.body.employee_id,
+    user_id: req.body.user_id,
     department_id: req.body.department_id,
   };
   

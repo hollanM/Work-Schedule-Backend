@@ -12,7 +12,7 @@ exports.create = (req, res) => {
     type: req.body.type,
     date_start_time_id: req.body.date_start_time_id,
     date_end_time_id: req.body.date_end_time_id,
-    employee_id: req.body.employee_id,
+    user_id: req.body.user_id,
   };
   
   logger.debug(`Creating availability: ${availability.type} for employee: ${availability.employee_id}`);

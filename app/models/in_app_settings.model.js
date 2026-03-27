@@ -17,12 +17,17 @@ const In_app_settings = SequelizeInstance.define("in_app_settings", {
         allowNull: false,
         defaultValue: false,
       },
-      employee_id: {
+      user_id: {
               type: Sequelize.INTEGER,
               allowNull: true,
               defaultValue: null,
+                references:{
+                  model:"users",
+                  key:"id"
+            }
               
             },
+          
       },
       {
         timestamps: false //removes the updated at and created at columns in the database for this table

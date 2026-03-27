@@ -9,12 +9,12 @@ const NotificationList = SequelizeInstance.define("notification_lists", {
     },
       
     //a reminder for me to put references here - Julian
-      employee_id: {
+      user_id: {
         type: Sequelize.INTEGER,
         allowNull: true,
         defaultValue: null,
         references: {
-          model: "employees",
+          model: "users",
           key: "id",
         },
       },

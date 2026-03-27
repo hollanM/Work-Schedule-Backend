@@ -10,7 +10,7 @@ exports.create = (req, res) => {
   // Create a Shift
   const shift = {
     //please tell me how to turn suggestions off :(
-    employee_id: req.body.employee_id,
+    user_id: req.body.user_id,
     start_day_id: req.body.start_day_id,
     end_day_id: req.body.end_day_id,
     position_id: req.body.position_id,
@@ -20,11 +20,13 @@ exports.create = (req, res) => {
     qualification_list_id: req.body.qualification_list_id,
     color: req.body.color,
 
+
     //non id fields
     open_to_take: req.body.open_to_take || false,
     swap_history: req.body.swap_history || "",
     is_template: req.body.is_template || false,
     has_gone_on_break: req.body.has_gone_on_break || false,
+    published: req.body.published || false
   };
   
   logger.debug(`Creating Shift...`);
