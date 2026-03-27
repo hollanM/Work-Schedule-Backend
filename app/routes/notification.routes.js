@@ -9,8 +9,8 @@
   // Retrieve all Notifications
   router.get("/", notification.findAll);
 
-  // Retrieve all Notifications for user
-  router.get("/userTut/:userId", notification.findAllForUser);
+  // Retrieve all Notifications for a specific notification_list
+  router.get("/list/:listId", notification.findAllForList);
 
   // Retrieve a single Tutorial with id
   router.get("/:id", notification.findOne);
@@ -20,6 +20,7 @@
 
   // Delete a Tutorial with id
   router.delete("/:id", notification.delete);
+
 
   // // Create a new Notification
   // router.post("/", [authenticate], notification.create);

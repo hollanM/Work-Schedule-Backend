@@ -65,6 +65,7 @@ const User = SequelizeInstance.define("user", {
         type: Sequelize.BOOLEAN,
         defaultValue: false
       },
+
 });
 
 export default User;

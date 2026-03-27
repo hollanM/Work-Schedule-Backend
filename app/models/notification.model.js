@@ -33,7 +33,7 @@ const Notification = SequelizeInstance.define("notifications", {
         "shiftReminder"
       ),
       allowNull: false,
-      defaultValue: ""
+      defaultValue: "scheduleUpdates"
     },
     to: {
       type: Sequelize.STRING,
@@ -43,12 +43,12 @@ const Notification = SequelizeInstance.define("notifications", {
     email_pref: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
-      defaultValue: "false"
+      defaultValue: false
     },
     mobile_pref: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
-      defaultValue: "false"
+      defaultValue: false
     },
     is_read: {
       type: Sequelize.BOOLEAN,
