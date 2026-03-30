@@ -20,6 +20,7 @@ exports.create = (req, res) => {
     course_id: req.body.course_id,
     start_time: req.body.start_time,
     end_time: req.body.end_time,
+    meet_day: req.body.meet_day,
   };
   logger.debug(course_meet.body);
   

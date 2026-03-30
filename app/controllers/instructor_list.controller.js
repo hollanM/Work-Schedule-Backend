@@ -21,7 +21,7 @@ exports.create = (req, res) => {
   };
   logger.debug(instructor_list.body);
   
-  logger.debug(`Creating Instructor_List: ${instructor_List.body}`);
+  logger.debug(`Creating Instructor_List: ${instructor_list.body}`);
   
   // Save Instructor_List in the database
   Instructor_List.create(instructor_list)

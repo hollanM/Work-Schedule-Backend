@@ -13,9 +13,9 @@ const Course = SequelizeInstance.define("courses", {
         defaultValue: "",
       },
     course_id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: true,
-        defaultValue: null,
+        defaultValue: "",
       },
 
       start_date:{

@@ -20,6 +20,10 @@ const StudentCourseList = SequelizeInstance.define("student_course_lists", {
         type: Sequelize.INTEGER,
         allowNull: true,
         defaultValue: null,
+        references:{
+            model: "courses",
+            key: "id",
+        }
       },
     },
       {

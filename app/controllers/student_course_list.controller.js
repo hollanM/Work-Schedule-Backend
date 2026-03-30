@@ -118,7 +118,7 @@ exports.update = (req, res) => {
         });
       } else {
         res.send({
-          message: `${Student_Course_List.body}Cannot update Student_Course_List with id=${id}. Maybe Student_Course_List was not found or req.body is empty!`,
+          message: `${req.body}Cannot update Student_Course_List with id=${id}. Maybe Student_Course_List was not found or req.body is empty!`,
         });
       }
     })

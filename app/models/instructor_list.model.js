@@ -12,6 +12,15 @@ const InstructorList = SequelizeInstance.define("instructor_lists", {
         allowNull: true,
         defaultValue: "",
       },
+      course_id: {
+        type: Sequelize.INTEGER,
+        allowNull: true,    
+        defaultValue: null,
+        references:{
+            model: "courses",
+            key: "id",
+        }
+       },   
       },
       {
         timestamps: false //removes the updated at and created at columns in the database for this table
