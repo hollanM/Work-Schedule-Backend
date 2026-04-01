@@ -19,6 +19,7 @@ exports.create = (req, res) => {
   const instructor = {
     name: req.body.name,
     email: req.body.email,
+    instructor_list_id: req.body.instructor_list_id,
   };
   logger.debug(instructor.body);
   
