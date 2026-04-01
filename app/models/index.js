@@ -37,6 +37,14 @@ import In_App_Settings from "./in_app_settings.model.js";
 //Julian's Clock list and clock in out changes end here 
 
 
+
+import Course from "./course.model.js";
+import Course_Meet from "./course_meet.model.js";
+import Student_Course_List from "./student_course_list.model.js";
+import Instructor from "./instructor.model.js";
+import Instructor_List from "./instructor_list.model.js";
+
+
 const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
@@ -76,6 +84,14 @@ db.clock_list = Clock_List;
 db.clock_in_out = Clock_In_Out;
 
 db.in_app_settings = In_App_Settings;
+
+
+
+db.course = Course;
+db.course_meet = Course_Meet;
+db.student_course_list = Student_Course_List;
+db.instructor = Instructor;
+db.instructor_list = Instructor_List;
 
 
 
@@ -207,5 +223,26 @@ User.hasMany(In_App_Settings, { foreignKey: "user_id", as: "in_app_settings" });
 //In_App_Settings Associations start here
 In_App_Settings.belongsTo(User, { foreignKey: "user_id", as: "users" });
 //In_App_Settings Associations end here
+
+
+Instructor.belongsTo(Instructor_List, { foreignKey: "instructor_list_id", as: "instructor_lists" });
+
+
+Instructor_List.belongsTo(Course, { foreignKey: "course_id", as: "courses" });
+Instructor_List.hasMany(Instructor, { foreignKey: "instructor_list_id", as: "instructors" });
+
+Course_Meet.belongsTo(Course, { foreignKey: "course_id", as: "courses" });
+
+Student_Course_List.belongsTo(Course, { foreignKey: "course_id", as: "courses" });
+Student_Course_List.belongsTo(User, { foreignKey: "user_id", as: "users" });
+
+User.hasMany(Student_Course_List, { foreignKey: "user_id", as: "student_course_lists" });
+
+Course.hasMany(Course_Meet, { foreignKey: "course_id", as: "course_meets" });
+Course.hasMany(Student_Course_List, { foreignKey: "course_id", as: "student_course_lists" });
+Course.hasOne(Instructor_List, { foreignKey: "course_id", as: "instructor_lists" });
+
+
+
 
 export default db;

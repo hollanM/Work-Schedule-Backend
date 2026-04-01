@@ -33,6 +33,15 @@ import NotificationRoutes from "./notification.routes.js";
 import NotificationListRoutes from "./notification_list.routes.js";
 import In_App_SettingsRoutes from "./in_app_settings.routes.js";
 
+
+//jm course structure backend changes start here
+import CourseRoutes from "./course.routes.js";
+import Course_MeetRoutes from "./course_meet.routes.js";
+import Student_Course_ListRoutes from "./student_course_list.routes.js";
+import InstructorRoutes from "./instructor.routes.js";
+import Instructor_ListRoutes from "./instructor_list.routes.js";
+//jm course structure backend changes end here
+
 const router = Router();
 
 router.use("/", AuthRoutes);
@@ -66,5 +75,11 @@ router.use("/clock_in_outs", ClockInOutRoutes);
 router.use("/notifications", NotificationRoutes);
 router.use("/notification_lists", NotificationListRoutes);
 router.use("/in_app_settings", In_App_SettingsRoutes);
+
+router.use("/courses", CourseRoutes);
+router.use("/course_meets", Course_MeetRoutes);
+router.use("/student_course_lists", Student_Course_ListRoutes);
+router.use("/instructors", InstructorRoutes);
+router.use("/instructor_lists", Instructor_ListRoutes);
 
 export default router;
