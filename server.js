@@ -34,48 +34,6 @@ app.use(express.urlencoded({ extended: true }));
 // Routes
 app.use("/workerscheduling-t4", routes);
 
-// ================= Nodemailer =================
-// CHANGE 
-// Move nodemailer into a routes file and a controller file.
-// In the controller file, you can probs call the notifications controller to add a record of the email being sent to the database.
-// Then run a chron task at 11:59 AM to scan schedules and somehow send emails 15 mins before a shift starts.
-const transporter = nodemailer.createTransport({
-  service: "purelymail",
-  host: "smtp.purelymail.com",
-  port: 465,
-  secure: true,
-  auth: {
-    user: process.env.SMTP_USER ,
-    pass: process.env.SMTP_PASS ,
-  },
-});
-
-app.post("/send", (req, res) => {
-  const { to, subject, body } = req.body;
-
-  if (!to || !subject || !body) {
-    return res.status(400).json({ error: "Missing to, subject, or body" });
-  }
-
-  const mailOptions = {
-    from: process.env.SMTP_USER, 
-    to,                          
-    subject,
-    text: body,                  
-    // html: body,               
-  };
-
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error("Error sending email:", error);
-      return res.status(500).json({ error: "Error sending email" });
-    }
-
-    res.json({ message: "Email sent successfully", info });
-  });
-});
-// ==============================================
-
 // Serve HTML (fixed __dirname)
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));

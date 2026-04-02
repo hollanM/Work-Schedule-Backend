@@ -32,6 +32,7 @@ import WeeklyScheduleRoutes from "./weekly_schedule.routes.js";
 import NotificationRoutes from "./notification.routes.js";
 import NotificationListRoutes from "./notification_list.routes.js";
 import In_App_SettingsRoutes from "./in_app_settings.routes.js";
+import EmailRoutes from "./email.routes.js";
 
 const router = Router();
 
@@ -66,5 +67,6 @@ router.use("/clock_in_outs", ClockInOutRoutes);
 router.use("/notifications", NotificationRoutes);
 router.use("/notification_lists", NotificationListRoutes);
 router.use("/in_app_settings", In_App_SettingsRoutes);
+router.use("/email", EmailRoutes);
 
 export default router;
