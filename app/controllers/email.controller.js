@@ -4,6 +4,19 @@ import db from "../models/index.js";
 import logger from "../config/logger.js";
 
 const Notification = db.notification;
+
+// Google Oauth2 transporter setup (AAAAA)
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    type: "OAuth2",
+    user: process.env.GMAIL_USER,
+    clientId: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
+  },
+});
+
 const exports = {};
 
 // send email ================================
@@ -18,40 +31,22 @@ exports.sendEmail = async (req, res) => {
     });
   }
 
-  // Create a transporter object using SMTP transport
   try {
-    const transporter = nodemailer.createTransport({
-      host: process.env.EMAIL_HOST,
-      port: process.env.EMAIL_PORT,
-      secure: process.env.EMAIL_PORT == 465 || process.env.EMAIL_SECURE === "true", 
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
-
-    // Verify connection configuration before sending email
-    // this will throw an error if the SMTP connection fails which we can catch and log.
-    await transporter.verify().catch(err => {
-      logger.error(`SMTP connection verification failed: ${err.message}`);
-      throw new Error(`SMTP connection failed: ${err.message}`);
-    });
-
-    // defines mail options 
+    // define mail options 
     const mailOptions = {
-      from: process.env.EMAIL_FROM,
+      from: process.env.GMAIL_USER,
       to,
       subject,
       text,
       html,
     };
 
-    logger.debug(`Attempting to send email to: ${to}`); // Remove when done testing
+    logger.debug(`Attempting to send email via OAuth2 to: ${to}`);
+    // transporter.sendMail will automatically check for token expiration and refresh if needed
     const info = await transporter.sendMail(mailOptions);
-    logger.info(`Email sent: ${info.messageId}`); // Remove when done testing
+    logger.info(`Email sent via OAuth2: ${info.messageId}`);
     
     // Create notification entry in the Notification table
-    // Still needs ListID
     const notification = {
       title: subject,
       description: text || html,
@@ -61,8 +56,6 @@ exports.sendEmail = async (req, res) => {
       is_read: false
     };
 
-    // Log the notification creation attempt.
-    // We'll still send the email even if the notification entry fails to be created. (though we really shouldn't.)
     await Notification.create(notification)
       .then(data => {
         logger.info(`Notification entry created for email: ${data.id}`);
@@ -71,13 +64,13 @@ exports.sendEmail = async (req, res) => {
         logger.error(`Error creating notification entry for email: ${err.message}`);
       });
 
-      // Send response back to client with message ID for reference
+    // Send response back to client with message ID for reference
     res.send({
-      message: "Email sent successfully!",
+      message: "Email sent successfully via OAuth2!",
       messageId: info.messageId
     });
   } catch (err) {
-    logger.error(`Error sending email: ${err.message}`);
+    logger.error(`Error sending email via OAuth2: ${err.message}`);
     res.status(500).send({
       message: err.message || "Some error occurred while sending the email.",
     });
