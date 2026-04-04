@@ -1,9 +1,39 @@
 import db  from "../models/index.js";
 import logger from "../config/logger.js";
+import axios from "axios";
+import Course from "../models/course.js";
+import CourseMeet from "../models/courseMeet.js";
+import InstructorList from "../models/instructorList.js";
+import Instructor from "../models/instructor.js";
+import StudentCourseList from "../models/studentCourseList.js";
 
 const User = db.user;
 const Op = db.Sequelize.Op;
 const exports = {};
+
+
+
+const dayMap = {
+  M: "Monday",
+  T: "Tuesday",
+  W: "Wednesday",
+  TH: "Thursday",
+  F: "Friday",
+  SA: "Saturday",
+  SU: "Sunday",
+};
+
+const formatTime = (timeStr) => {
+  if (!timeStr) return null;
+
+  const [time, modifier] = timeStr.match(/(\d+:\d+)(AM|PM)/).slice(1);
+  let [hours, minutes] = time.split(":");
+
+  if (modifier === "PM" && hours !== "12") hours = parseInt(hours) + 12;
+  if (modifier === "AM" && hours === "12") hours = "00";
+
+  return `${hours.toString().padStart(2, "0")}:${minutes}:00`;
+};
 // Create and Save a new User
 exports.create = (req, res) => {
   // Validate request
@@ -153,6 +183,94 @@ exports.update = (req, res) => {
         message: "Error updating User with id=" + id,
       });
     });
+};
+
+
+
+
+exports.fetch_and_create_schedule = async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+
+    // 1. Get user from DB
+    const user = await User.findByPk(userId);
+
+    if (!user) {
+      return res.status(404).send({ message: "User not found" });
+    }
+
+    const email = user.email;
+
+    // 2. Call external API using email
+    const response = await axios.get(`YOUR_API_URL?email=${email}`);
+
+    const data = response.data;
+
+    // (continue your schedule logic here...)
+
+    res.send({ message: "Success" });
+    // 1. Call external API
+   
+
+    if (!data.Success) {
+      return res.status(400).send({ message: "API returned failure" });
+    }
+
+    // 2. Loop through courses
+    for (const courseData of data.Courses) {
+
+      // 3. Find or create course
+      const [course] = await Course.findOrCreate({
+        where: { course_id: courseData.CourseID },
+        defaults: {
+          name: courseData.CourseName,
+          start_date: courseData.start_date,
+          end_date: courseData.end_date,
+        },
+      });
+
+      // 4. Link student to course (prevent duplicates)
+      await StudentCourseList.findOrCreate({
+        where: {
+          user_id: userId,
+          course_id: course.id,
+        },
+      });
+
+      // 5. Create instructor list
+      const instructorList = await InstructorList.create({
+        course_id: course.id,
+      });
+
+      // 6. Insert instructors
+      for (const inst of courseData.Instructors) {
+        await Instructor.create({
+          name: inst.Name,
+          email: inst.Email,
+          instructor_list_id: instructorList.id,
+        });
+      }
+
+      // 7. Insert meeting times
+      for (const meet of courseData.meeting_times) {
+        for (const day of meet.days) {
+          await CourseMeet.create({
+            meet_day: dayMap[day] || "Unset",
+            start_time: formatTime(meet.start_time),
+            end_time: formatTime(meet.end_time),
+            course_id: course.id,
+          });
+        }
+      }
+    }
+
+    res.send({ message: "Schedule fetched and stored successfully" });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ message: "Error fetching schedule" });
+  }
 };
 
 // Delete a User with the specified id in the request
