@@ -1,17 +1,27 @@
 import db  from "../models/index.js";
 import logger from "../config/logger.js";
 import axios from "axios";
-import Course from "../models/course.js";
-import CourseMeet from "../models/courseMeet.js";
-import InstructorList from "../models/instructorList.js";
-import Instructor from "../models/instructor.js";
-import StudentCourseList from "../models/studentCourseList.js";
+import Course from "../models/course.model.js";
+import CourseMeet from "../models/course_meet.model.js";
+import InstructorList from "../models/instructor_list.model.js";
+import Instructor from "../models/instructor.model.js";
+import StudentCourseList from "../models/student_course_list.model.js";
 
 const User = db.user;
 const Op = db.Sequelize.Op;
 const exports = {};
 
+const getCurrentTermCode = () => {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = now.getMonth(); // 0 = Jan, 11 = Dec
 
+  // Spring: Jan (0) → July (6)
+  // Fall: Aug (7) → Dec (11)
+  const term = month <= 6 ? "SP" : "FA";
+
+  return `${year}${term}`;
+};
 
 const dayMap = {
   M: "Monday",
@@ -201,15 +211,14 @@ exports.fetch_and_create_schedule = async (req, res) => {
     }
 
     const email = user.email;
-
+    const termcode = getCurrentTermCode();
     // 2. Call external API using email
-    const response = await axios.get(`YOUR_API_URL?email=${email}`);
+    const response = await axios.get(`https://stingray.oc.edu/api/accommodationuserschedule/${email}/${termcode}`);
 
     const data = response.data;
 
     // (continue your schedule logic here...)
 
-    res.send({ message: "Success" });
     // 1. Call external API
    
 
@@ -244,13 +253,22 @@ exports.fetch_and_create_schedule = async (req, res) => {
       });
 
       // 6. Insert instructors
-      for (const inst of courseData.Instructors) {
-        await Instructor.create({
-          name: inst.Name,
-          email: inst.Email,
-          instructor_list_id: instructorList.id,
-        });
-      }
+    for (const inst of courseData.Instructors) {
+  const existing = await Instructor.findOne({
+    where: {
+      email: inst.Email,
+      instructor_list_id: instructorList.id,
+    },
+  });
+
+  if (!existing) {
+    await Instructor.create({
+      name: inst.Name,
+      email: inst.Email,
+      instructor_list_id: instructorList.id,
+    });
+  }
+}
 
       // 7. Insert meeting times
       for (const meet of courseData.meeting_times) {
