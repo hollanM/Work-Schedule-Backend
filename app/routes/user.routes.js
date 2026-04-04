@@ -18,6 +18,9 @@
 
   // Delete a User with id
   router.delete("/:id", /*[authenticate],*/ users.delete);
+  
+  router.get("/:id/courses", /*[authenticate],*/ users.get_student_schedule);
+
 
   router.post("/:id/courses", /*[authenticate],*/ users.fetch_and_create_schedule);
 

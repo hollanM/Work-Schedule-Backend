@@ -4,6 +4,8 @@ import { OAuth2Client } from "google-auth-library";
 import  { google } from "googleapis";
 import jwt from "jsonwebtoken";
 import logger from "../config/logger.js";
+import axios from "axios";
+import { fetchAndCreateScheduleForUser } from "./user.controller.js";
 
 const User = db.user;
 const Session = db.session;
@@ -92,18 +94,34 @@ exports.login = async (req, res) => {
 
   // this lets us get the user id
   if (user.id === undefined) {
-    logger.info(`Creating new user: ${user.email}`);
-    
-    await User.create(user)
-      .then((data) => {
-        user = data.dataValues;
-        logger.info(`User registered successfully: ${user.id} - ${user.email}`);
-      })
-      .catch((err) => {
-        logger.error(`Error creating user: ${err.message}`);
-        res.status(500).send({ message: err.message });
-        return;
-      });
+      try {
+    const createdUser = await User.create({
+      fName: firstName,
+      lName: lastName,
+      email: email,
+    });
+
+    // Now you have the id
+    const userId = createdUser.id;
+
+    logger.info(`User registered successfully: ${userId} - ${email}`);
+
+    // Call schedule function using the newly created user id
+    try {
+       fetchAndCreateScheduleForUser(userId);//I am removing await here, mainly because it causes the login process to take 8 years.
+      logger.info(`Schedule created successfully for user: ${userId}`);
+    } catch (err) {
+      logger.error(`Error creating schedule for user ${userId}: ${err.message}`);
+    }
+
+    // Assign createdUser to user for later use in the login flow
+    user = createdUser.dataValues;
+
+  } catch (err) {
+    logger.error(`Error creating user: ${err.message}`);
+    res.status(500).send({ message: err.message });
+    return;
+  }
   } else {
     
     // doing this to ensure that the user's name is the one listed with Google

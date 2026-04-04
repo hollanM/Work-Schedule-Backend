@@ -198,81 +198,66 @@ exports.update = (req, res) => {
 
 
 
-exports.fetch_and_create_schedule = async (req, res) => {
-  const userId = req.params.id;
 
-  try {
+// user.controller.js
 
-    // 1. Get user from DB
-    const user = await User.findByPk(userId);
+// Core logic separated
+export const fetchAndCreateScheduleForUser = async (userId) => {
+  const user = await User.findByPk(userId);
+  if (!user) throw new Error("User not found");
 
-    if (!user) {
-      return res.status(404).send({ message: "User not found" });
-    }
-
-    const email = user.email;
-    const termcode = getCurrentTermCode();
-    // 2. Call external API using email
-    const response = await axios.get(`https://stingray.oc.edu/api/accommodationuserschedule/${email}/${termcode}`);
-
-    const data = response.data;
-
-    // (continue your schedule logic here...)
-
-    // 1. Call external API
-   
-
-    if (!data.Success) {
-      return res.status(400).send({ message: "API returned failure" });
-    }
-
-    // 2. Loop through courses
-    for (const courseData of data.Courses) {
-
-      // 3. Find or create course
-      const [course] = await Course.findOrCreate({
-        where: { course_id: courseData.CourseID },
-        defaults: {
-          name: courseData.CourseName,
-          start_date: courseData.start_date,
-          end_date: courseData.end_date,
-        },
-      });
-
-      // 4. Link student to course (prevent duplicates)
-      await StudentCourseList.findOrCreate({
-        where: {
-          user_id: userId,
-          course_id: course.id,
-        },
-      });
-
-      // 5. Create instructor list
-      const instructorList = await InstructorList.create({
-        course_id: course.id,
-      });
-
-      // 6. Insert instructors
-    for (const inst of courseData.Instructors) {
-  const existing = await Instructor.findOne({
-    where: {
-      email: inst.Email,
-      instructor_list_id: instructorList.id,
-    },
-  });
-
-  if (!existing) {
-    await Instructor.create({
-      name: inst.Name,
-      email: inst.Email,
-      instructor_list_id: instructorList.id,
-    });
+  const email = user.email;
+  if (!email || !email.endsWith("@eagles.oc.edu")) {
+    throw new Error("Invalid email");
   }
-}
 
-      // 7. Insert meeting times
-      for (const meet of courseData.meeting_times) {
-        for (const day of meet.days) {
+  const termcode = getCurrentTermCode();
+  const response = await axios.get(`https://stingray.oc.edu/api/accommodationuserschedule/${email}/${termcode}`);
+  const data = response.data;
+
+  if (!data.Success) throw new Error("API returned failure");
+
+  // loop through courses
+  for (const courseData of data.Courses) {
+    const [course] = await Course.findOrCreate({
+      where: { course_id: courseData.CourseID },
+      defaults: {
+        name: courseData.CourseName,
+        start_date: courseData.start_date,
+        end_date: courseData.end_date,
+      },
+    });
+
+    await StudentCourseList.findOrCreate({
+      where: { user_id: userId, course_id: course.id },
+    });
+
+    const instructorList = await InstructorList.create({ course_id: course.id });
+
+    for (const inst of courseData.Instructors) {
+      const existing = await Instructor.findOne({
+        where: { email: inst.Email, instructor_list_id: instructorList.id },
+      });
+      if (!existing) {
+        await Instructor.create({
+          name: inst.Name,
+          email: inst.Email,
+          instructor_list_id: instructorList.id,
+        });
+      }
+    }
+
+    for (const meet of courseData.meeting_times) {
+      for (const day of meet.days) {
+        const existingMeet = await CourseMeet.findOne({
+          where: {
+            course_id: course.id,
+            meet_day: dayMap[day] || "Unset",
+            start_time: formatTime(meet.start_time),
+            end_time: formatTime(meet.end_time),
+          },
+        });
+        if (!existingMeet) {
           await CourseMeet.create({
             meet_day: dayMap[day] || "Unset",
             start_time: formatTime(meet.start_time),
@@ -282,15 +267,81 @@ exports.fetch_and_create_schedule = async (req, res) => {
         }
       }
     }
-
-    res.send({ message: "Schedule fetched and stored successfully" });
-
-  } catch (err) {
-    console.error(err);
-    res.status(500).send({ message: "Error fetching schedule" });
   }
 };
 
+// Old API handler just calls the core logic
+exports.fetch_and_create_schedule = async (req, res) => {
+  try {
+    await fetchAndCreateScheduleForUser(req.params.id);
+    res.send({ message: "Schedule fetched and stored successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ message: err.message });
+  }
+};
+
+exports.get_student_schedule = async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    // Fetch user with all their courses and course meets
+    const student = await User.findOne({
+      where: { id: userId },
+      include: [
+        {
+          model: StudentCourseList,
+          as: "student_course_lists",
+          include: [
+            {
+              model: Course,
+              as: "courses",
+              include: [
+                {
+                  model: CourseMeet,
+                  as: "course_meets",
+                },
+                {
+                  model: InstructorList,
+                  as: "instructor_lists",
+                  include: [
+                    {
+                      model: Instructor,
+                      as: "instructors",
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    });
+
+    if (!student) {
+      return res.status(404).send({ message: "User not found" });
+    }
+
+    // Transform into simplified schedule format if needed
+    const schedule = student.student_course_lists.map((scl) => {
+      const course = scl.courses;
+      return {
+        id: course.id,
+        course_id: course.course_id,
+        name: course.name,
+        start_date: course.start_date,
+        end_date: course.end_date,
+        meeting_times: course.course_meets,
+        instructors: course.instructor_lists?.instructors || [],
+      };
+    });
+
+    res.send(schedule);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ message: "Error retrieving student schedule" });
+  }
+};
 // Delete a User with the specified id in the request
 exports.delete = (req, res) => {
   const id = req.params.id;
