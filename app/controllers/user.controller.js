@@ -38,6 +38,24 @@ exports.create = (req, res) => {
   User.create(user)
     .then((data) => {
       logger.info(`User created successfully: ${data.id} - ${data.email}`);
+
+      // create notification_list entry for the user
+      const notificationListEntry = {
+        user_id: data.id,
+        department_id: null,
+      };
+
+      // create notification list entry for the user
+      db.notification_list.create(notificationListEntry)
+        .then((nData) => {
+          logger.info(`Notification list entry created for user ID: ${data.id}`);
+        })
+        .catch((err) => {
+          logger.error(
+            `Error creating notification list entry for user ID ${data.id}: ${err.message}`
+          );
+        });
+
       res.send(data);
     })
     .catch((err) => {

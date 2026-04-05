@@ -4,6 +4,8 @@ import db from "../models/index.js";
 import logger from "../config/logger.js";
 
 const Notification = db.notification;
+const User = db.user;
+const NotificationList = db.notification_list;
 
 // Google Oauth2 transporter setup (AAAAA)
 const transporter = nodemailer.createTransport({
@@ -18,6 +20,39 @@ const transporter = nodemailer.createTransport({
 });
 
 const exports = {};
+
+// Get user_id by email passed in by json body
+exports.getUserIdByEmail = async (email) => {
+  try {
+    const user = await User.findOne({ where: { email } });
+    if (user) {
+      return { userId: user.id, departmentId: user.department_id };
+    } else {
+      logger.warn(`No user found with email: ${email}`);
+      return null;
+    }
+  } catch (err) {
+    logger.error(`Error fetching user by email: ${err.message}`);
+    throw err;
+  }
+}
+
+// Get notification list entry by user_id
+exports.getNotificationListByUserId = async (userId) => {
+  try {
+    const notificationListEntry = await NotificationList.findOne({ where: { user_id: userId } });
+    if (notificationListEntry) {
+      return notificationListEntry;
+    } else {
+      logger.warn(`No notification list entry found for user ID: ${userId}`);
+      return null;
+    }
+  } catch (err) {
+    logger.error(`Error fetching notification list by user ID: ${err.message}`);
+    throw err;
+  }
+}
+
 
 // send email ================================
 exports.sendEmail = async (req, res) => {
@@ -46,6 +81,16 @@ exports.sendEmail = async (req, res) => {
     const info = await transporter.sendMail(mailOptions);
     logger.info(`Email sent via OAuth2: ${info.messageId}`);
     
+    const userId = await exports.getUserIdByEmail(to);
+    const notificationListEntry = await exports.getNotificationListByUserId(userId ? userId.userId : null); // if userId is null, give the var null
+
+    // output user id and department id to logs for debugging
+    if (userId) {
+      logger.debug(`Email recipient user ID: ${userId.userId}, department ID: ${userId.departmentId}`);
+    } else {
+      logger.warn(`Could not find user ID for email recipient: ${to}`);
+    }
+
     // Create notification entry in the Notification table
     const notification = {
       title: subject,
@@ -53,6 +98,7 @@ exports.sendEmail = async (req, res) => {
       to: to,
       type: "email",
       date_time_sent: new Date(),
+      notification_list_id: notificationListEntry.id,
       is_read: false
     };
 
