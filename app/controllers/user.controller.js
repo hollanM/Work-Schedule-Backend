@@ -26,7 +26,8 @@ exports.create = (req, res) => {
     oc_id: req.body.oc_id,
     phone_num: req.body.phone_num,
     clocked_in: req.body.clocked_num,
-    pay_rate: req.body.pay_rate
+    pay_rate: req.body.pay_rate,
+    manager_notes: req.body.manager_notes,
 
     // refresh_token: req.body.refresh_token,
     // expiration_date: req.body.expiration_date

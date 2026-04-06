@@ -59,13 +59,20 @@ const User = SequelizeInstance.define("user", {
       pay_rate: {
         type: Sequelize.FLOAT,
         allowNull: true,
-        defaultValue: null
+        defaultValue: 8.75
       },
       clocked_in: {
         type: Sequelize.BOOLEAN,
         defaultValue: false
       },
-
+      manager_notes: {
+        type: Sequelize.TEXT,
+        allowNull: true,
+        defaultValue: null
+      }
+},
+{
+  timestamps: false, //if the tables are missing and this is not here, it will just error
 });
 
 export default User;
