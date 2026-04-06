@@ -18,10 +18,11 @@ exports.create = (req, res) => {
   // Create a Notification
   const notification = {
     notification_list_id: req.body.notificationListId || req.body.notificationList_id || req.params.notificationListId || req.body.notification_list_id || null,
-    //userId: req.body.userId || req.body.user_id ||null, (notification doesn't have a user id)
     title: req.body.title,
     description: req.body.description,
     to: req.body.to,
+    email_pref: req.body.email_pref === true ? true : false || req.body.email_pref === "true",
+    mobile_pref: req.body.mobile_pref === true ? true : false || req.body.mobile_pref === "true",
     type: req.body.type,
     is_read: req.body.is_read === "true" || req.body.is_read === true ? true : false,
     date_time_sent: req.body.date_time_sent || null,
@@ -69,7 +70,7 @@ exports.findAll = (req, res) => {
     });
 };
 // Retrieve all Notifications for a tutorial from the database.
-// TODO: Do we need findAllForTutorial?
+// TODO: Do we need findAllForTutorial? Find all notifications for a user or admin? Maybe?
 exports.findAllForTutorial = (req, res) => {
   const tutorialId = req.params.tutorialId;
 
@@ -83,20 +84,19 @@ exports.findAllForTutorial = (req, res) => {
       });
     });
 };
-// Retrieve all Notifications for a user from the database.
-exports.findAllForUser = (req, res) => {
-  const userId = req.params.userId;
+// Retrieve all Notifications for a notification_list
+exports.findAllForList = (req, res) => {
+  const listId = req.params.listId;
 
-  Notification.findAll({ where: { userId: userId } })
-    .then((data) => {
-      res.send(data);
-    })
+  Notification.findAll({ where: { notification_list_id: listId } })
+    .then((data) => res.send(data))
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while retrieving notifications.",
+        message: err.message || "Error retrieving notifications for list."
       });
     });
 };
+
 // Find a single Notification with an id
 exports.findOne = (req, res) => {
   const id = req.params.id;

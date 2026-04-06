@@ -104,24 +104,26 @@ exports.login = async (req, res) => {
         res.status(500).send({ message: err.message });
         return;
       });
-  } else {
+  } 
+  //HOLLAN HERE! I don't want google to overwrite the user's name in the database so I am commenting this out! Thank you!
+  // else {
     
-    // doing this to ensure that the user's name is the one listed with Google
-    user.fName = firstName;
-    user.lName = lastName;
+  //   // doing this to ensure that the user's name is the one listed with Google
+  //   user.fName = firstName;
+  //   user.lName = lastName;
   
-    await User.update(user, { where: { id: user.id } })
-      .then((num) => {
-        if (num == 1) {
-          logger.info(`Updated user name: ${user.id}`);
-        } else {
-          logger.warn(`Cannot update user with id=${user.id}. User not found or empty body`);
-        }
-      })
-      .catch((err) => {
-        logger.error(`Error updating user ${user.id}: ${err.message}`);
-      });
-  }
+  //   await User.update(user, { where: { id: user.id } })
+  //     .then((num) => {
+  //       if (num == 1) {
+  //         logger.info(`Updated user name: ${user.id}`);
+  //       } else {
+  //         logger.warn(`Cannot update user with id=${user.id}. User not found or empty body`);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       logger.error(`Error updating user ${user.id}: ${err.message}`);
+  //     });
+  // }
 
   // try to find session first
   logger.debug(`Looking for existing session for: ${email}`);

@@ -31,6 +31,7 @@ exports.create = (req, res) => {
 
     // refresh_token: req.body.refresh_token,
     // expiration_date: req.body.expiration_date
+
   };
 
   logger.debug(`Creating user: ${user.email}`);

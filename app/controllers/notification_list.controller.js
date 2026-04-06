@@ -5,40 +5,55 @@ const NotificationList = db.notification_list;
 const Op = db.Sequelize.Op;
 const exports = {};
 // Create and Save a new NotificationList
-exports.create = (req, res) => {
-  // Create a NotificationList
-  // Create a NotificationList
-  const notification_list = {
-    user_id: req.body.user_id,
-    department_id: req.body.department_id,
-  };
-  
-  logger.debug(`Creating notification_list: ${JSON.stringify(notification_list)}`);
-  
-  // Save NotificationList in the database
-  NotificationList.create(notification_list)
-    .then((data) => {
-      logger.info(`NotificationList created successfully: ${data.id} - ${data.title}`);
-      res.send(data);
-    })
-    .catch((err) => {
-      logger.error(`Error creating notification_list: ${err.message}`);
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while creating the NotificationList.",
-      });
+exports.create = async (req, res) => {
+  try {
+
+    const list = await NotificationList.create({
+      user_id: req.body.user_id,
+      department_id: req.body.department_id
     });
+    const types = [
+      "timeOffRequests",
+      "swapDropRequests",
+      "openShiftRequests",
+      "scheduleUpdates",
+      "newUserRegistrations",
+      "availabilityChange",
+      "clockInOutReminders",
+      "overtimeAlerts",
+      "payrollReminders",
+      "reports",
+      "workplaceAlerts",
+      "shiftReminder"
+    ];
+    const defaultRows = types.map(type => ({
+      type,
+      email_pref: false,
+      mobile_pref: false,
+      time: type === "shiftReminder" ? "2 hours before shift start" : null,
+      notification_list_id: list.id
+    }));
+
+    await db.notification.bulkCreate(defaultRows);
+
+    res.send(list);
+
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "Error creating notification list"
+    });
+  }
 };
+
+
+
 // Retrieve all NotificationLists from the database.
 exports.findAll = (req, res) => {
   const notification_listId = req.query.notification_listId;
-  var condition = notification_listId
-    ? {
-        notification_listId: {
-          [Op.like]: `%${notification_listId}%`,
-        },
-      }
-    : null;
+  var condition = notification_listId? { notification_listId: 
+    { [Op.like]: `%${notification_listId}%`, 
+  },
+}: null;
 
   logger.debug(`Fetching all notification_lists with condition: ${JSON.stringify(condition)}`);
 
@@ -69,11 +84,13 @@ exports.findAllForTutorial = (req, res) => {
       });
     });
 };
+
+
 // Retrieve all NotificationLists for a user from the database.
 exports.findAllForUser = (req, res) => {
   const userId = req.params.userId;
 
-  NotificationList.findAll({ where: { userId: userId } })
+  NotificationList.findAll({ where: { user_id: userId } })
     .then((data) => {
       res.send(data);
     })
@@ -160,21 +177,6 @@ exports.delete = (req, res) => {
       logger.error(`Error deleting notification_list ${id}: ${err.message}`);
       res.status(500).send({
         message: "Could not delete NotificationList with id=" + id,
-      });
-    });
-};
-
-// Find all published NotificationLists
-exports.findAllPublished = (req, res) => {
-  const notification_listId = req.query.notification_listId;
-
-  NotificationList.findAll({ where: { published: true } })
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: err.message || "Some error occurred while retrieving notification_lists.",
       });
     });
 };
