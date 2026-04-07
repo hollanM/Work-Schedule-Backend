@@ -22,6 +22,9 @@
   // Retrieve all People with a single department_id
   router.get("/department/:department_id", /*[authenticate],*/ users.findAllDep);
 
+  // Retrieve a single User with an employee id
+  router.get("/employee/:oc_id", /*[authenticate],*/ users.findByOCid);
+
 
   export default router;
 

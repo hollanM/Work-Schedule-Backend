@@ -223,4 +223,35 @@ exports.findAllDep = (req, res) => {
     });
 };
 
+// Find a single User with an employee id
+exports.findByOCid = (req, res) => {
+  const id = req.params.oc_id;
+
+  logger.debug(`Finding user with id: ${id}`);
+
+  User.findOne({
+    where: {
+      oc_id: id,
+    },
+  })
+    .then((data) => {
+      if (data) {
+        logger.info(`User found with id: ${id}`);
+        res.send(data);
+      } else {
+        logger.warn(`User not found with id: ${id}`);
+        res.send({ id: "not found" });
+        /*res.status(404).send({
+          message: `Cannot find User with email=${email}.`
+        });*/
+      }
+    })
+    .catch((err) => {
+      logger.error(`Error retrieving user by id ${id}: ${err.message}`);
+      res.status(500).send({
+        message: "Error retrieving User with id=" + id,
+      });
+    });
+};
+
 export default exports;
