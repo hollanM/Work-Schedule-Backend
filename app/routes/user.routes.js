@@ -19,6 +19,9 @@
   // Delete a User with id
   router.delete("/:id", /*[authenticate],*/ users.delete);
 
+  // Retrieve all People with a single department_id
+  router.get("/department/:department_id", /*[authenticate],*/ users.findAllDep);
+
 
   export default router;
 

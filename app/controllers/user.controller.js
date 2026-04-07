@@ -187,5 +187,40 @@ exports.delete = (req, res) => {
     });
 };
 
+// Find all users with a single department_id
+exports.findAllDep = (req, res) => {
+  const department_id = parseInt(req.params.department_id);
+
+  if (isNaN(department_id)) {
+    logger.warn(`Invalid department_id provided: ${req.params.department_id}`);
+    res.status(400).send({
+      message: "Invalid department_id. It must be a number.",
+    });
+    return;
+  }
+
+  logger.debug(`Finding users with department_id: ${department_id}`);
+
+  User.findAll({
+    where: {
+      department_id: department_id,
+    },
+  })
+    .then((data) => {
+      if (data) {
+        logger.info(`Users found with department_id: ${department_id}`);
+        res.send(data);
+      } else {
+        logger.warn(`No users found with department_id: ${department_id}`);
+        res.send({ department_id: "not found" });
+      }
+    })
+    .catch((err) => {
+      logger.error(`Error retrieving users with department_id ${department_id}: ${err.message}`);
+      res.status(500).send({
+        message: "Error retrieving Users with department_id=" + department_id,
+      });
+    });
+};
 
 export default exports;
