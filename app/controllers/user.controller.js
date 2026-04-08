@@ -25,7 +25,7 @@ exports.create = (req, res) => {
     role: req.body.role,
     oc_id: req.body.oc_id,
     phone_num: req.body.phone_num,
-    clocked_in: req.body.clocked_num,
+    clocked_in: req.body.clocked_in,
     pay_rate: req.body.pay_rate,
     manager_notes: req.body.manager_notes,
 
@@ -137,7 +137,7 @@ exports.update = (req, res) => {
     where: { id: id },
   })
     .then((num) => {
-      if (num == 1) {
+      if (num >= 0) { //this will cause sequalize to update the user even if there are no changes, because if it choose not to update it returns an error to the frontend, which makes it look like it failed
         logger.info(`User ${id} updated successfully`);
         res.send({
           message: "User was updated successfully.",
@@ -219,6 +219,37 @@ exports.findAllDep = (req, res) => {
       logger.error(`Error retrieving users with department_id ${department_id}: ${err.message}`);
       res.status(500).send({
         message: "Error retrieving Users with department_id=" + department_id,
+      });
+    });
+};
+
+// Find a single User with an employee id
+exports.findByOCid = (req, res) => {
+  const id = req.params.oc_id;
+
+  logger.debug(`Finding user with id: ${id}`);
+
+  User.findOne({
+    where: {
+      oc_id: id,
+    },
+  })
+    .then((data) => {
+      if (data) {
+        logger.info(`User found with id: ${id}`);
+        res.send(data);
+      } else {
+        logger.warn(`User not found with id: ${id}`);
+        res.send({ id: "not found" });
+        /*res.status(404).send({
+          message: `Cannot find User with email=${email}.`
+        });*/
+      }
+    })
+    .catch((err) => {
+      logger.error(`Error retrieving user by id ${id}: ${err.message}`);
+      res.status(500).send({
+        message: "Error retrieving User with id=" + id,
       });
     });
 };
