@@ -25,7 +25,7 @@ exports.create = (req, res) => {
     role: req.body.role,
     oc_id: req.body.oc_id,
     phone_num: req.body.phone_num,
-    clocked_in: req.body.clocked_num,
+    clocked_in: req.body.clocked_in,
     pay_rate: req.body.pay_rate,
     manager_notes: req.body.manager_notes,
 
@@ -137,7 +137,7 @@ exports.update = (req, res) => {
     where: { id: id },
   })
     .then((num) => {
-      if (num == 1) {
+      if (num >= 0) { //this will cause sequalize to update the user even if there are no changes, because if it choose not to update it returns an error to the frontend, which makes it look like it failed
         logger.info(`User ${id} updated successfully`);
         res.send({
           message: "User was updated successfully.",
