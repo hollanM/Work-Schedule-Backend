@@ -95,11 +95,26 @@ exports.login = async (req, res) => {
     logger.info(`Creating new user: ${user.email}`);
     
     await User.create(user)
-      .then((data) => {
+      .then(async (data) => {
         user = data.dataValues;
         logger.info(`User registered successfully: ${user.id} - ${user.email}`);
-      })
-      .catch((err) => {
+
+        // create notification_list entry for the user
+        const notificationListEntry = {
+          user_id: user.id,
+          department_id: null,
+        };
+
+        await db.notification_list.create(notificationListEntry)
+          .then((nData) => {
+            logger.info(`Notification list entry created for user ID: ${user.id}`);
+          })
+          .catch((err) => {
+            logger.error(
+              `Error creating notification list entry for user ID ${user.id}: ${err.message}`
+            );
+          });
+      }).catch((err) => {
         logger.error(`Error creating user: ${err.message}`);
         res.status(500).send({ message: err.message });
         return;
