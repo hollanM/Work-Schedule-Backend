@@ -20,6 +20,8 @@
   // Delete a Tutorial with id
   router.delete("/:id", /*[authenticate],*/ shifts.delete);
 
+  router.get("/users/:user_id", /*[authenticate],*/ shifts.findForUser);
+
 
   export default router;
 

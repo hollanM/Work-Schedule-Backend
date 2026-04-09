@@ -96,6 +96,23 @@ exports.findOne = (req, res) => {
       });
     });
 };
+
+exports.findForUser = (req, res) => {
+  const user_id = req.params.user_id;
+  logger.debug(`Finding Shifts for user with id: ${user_id}`);
+  Shift.findAll({ where: { user_id: user_id } })
+    .then((data) => {
+      logger.info(`Retrieved ${data.length} Shifts for user ${user_id}`);
+      res.send(data);
+    })
+    .catch((err) => {
+      logger.error(`Error retrieving Shifts for user ${user_id}: ${err.message}`);
+      res.status(500).send({
+        message: "Error retrieving Shifts for user with id=" + user_id,
+      });
+    });
+  };
+
 // Update a Shift by the id in the request
 exports.update = (req, res) => {
   const id = req.params.id;
