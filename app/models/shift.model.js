@@ -84,7 +84,7 @@ const Shift = SequelizeInstance.define("shifts", {
     //foreign key constraint for shift_task_lists table
    
     references:{
-      model: "shift_task_lists",
+      model: "departments",
       key: "id",
     }
 
