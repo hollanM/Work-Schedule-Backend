@@ -10,6 +10,8 @@
   // Retrieve all shifts
   router.get("/", /*[authenticate],*/ shifts.findAll);
 
+  //get all shifts within a department
+  router.get("/:department_id", /*[authenticate],*/ shifts.findAllDept)
 
   // Retrieve a single Tutorial with id
   router.get("/:id", /*[authenticate],*/ shifts.findOne);

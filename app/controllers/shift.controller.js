@@ -70,7 +70,28 @@ exports.findAll = (req, res) => {
       });
     });
 };
-// Retrieve all Shifts for a tutorial from the database.
+
+// Retrieve all Shifts with the same department from the database.
+exports.findAllDept = (req, res) => {
+  const department = req.params.department_id;
+  const condition = department
+    ? { department_id: department }
+    : null;
+
+  logger.debug(`Fetching all Shifts with condition: ${JSON.stringify(condition)}`);
+
+  Shift.findAll({ where: condition })
+    .then((data) => {
+      logger.info(`Retrieved ${data.length} Shifts`);
+      res.send(data);
+    })
+    .catch((err) => {
+      logger.error(`Error retrieving Shifts: ${err.message}`);
+      res.status(500).send({
+        message: err.message || "Some error occurred while retrieving Shifts.",
+      });
+    });
+};
 
 // Find a single Shift with an id
 exports.findOne = (req, res) => {
