@@ -42,9 +42,9 @@ const User = SequelizeInstance.define("user", {
   // },
 
   role:{
-    type: Sequelize.ENUM("Manager", "Employee"),
+    type: Sequelize.ENUM("Manager", "Employee", "Unset"),
     allowNull: false,
-    defaultValue: "Employee",
+    defaultValue: "Unset",
   },
       phone_num: {
         type: Sequelize.STRING,
