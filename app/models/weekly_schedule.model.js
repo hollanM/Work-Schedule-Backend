@@ -7,8 +7,8 @@ const Weekly_Schedule = SequelizeInstance.define("weekly_schedules", {
       autoIncrement: true,
       primaryKey: true,
     },
-    start_day_id:{
-        type: Sequelize.INTEGER,
+    start_day:{
+        type: Sequelize.DATE,
         allowNull: true,
       defaultValue: null,
 
@@ -18,11 +18,11 @@ const Weekly_Schedule = SequelizeInstance.define("weekly_schedules", {
 
     },
   },
-     end_day_id:{
-        type: Sequelize.INTEGER,
+     end_day:{
+        type: Sequelize.DATE,
         allowNull: true,
       defaultValue: null,
-        
+      
     references:{
       model: "date_times",
       key: "id",

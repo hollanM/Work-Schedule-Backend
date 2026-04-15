@@ -104,8 +104,6 @@ Clock_In_Out.belongsTo(Department, { foreignKey: "department_id", as: "departmen
 
 
 //Weekly_Schedule foreign key associations start here
-Weekly_Schedule.belongsTo(Date_time, { foreignKey: "start_day_id", as: "start_date_times" });
-Weekly_Schedule.belongsTo(Date_time, { foreignKey: "end_day_id", as: "end_date_times" });
 Weekly_Schedule.belongsTo(Department, { foreignKey: "department_id", as: "departments" });
 //Weekly_Schedule foreign key associations end here
 
@@ -141,8 +139,6 @@ Shift.belongsTo(Department, { foreignKey: "department_id", as: "departments" });
 Shift.belongsTo(Position, { foreignKey: "position_id", as: "positions" });
 Shift.belongsTo(Weekly_Schedule, { foreignKey: "weekly_schedule_id", as: "weekly_schedules" });
 Shift.belongsTo(User, { foreignKey: "user_id", as: "users" });
-Shift.belongsTo(Date_time, { foreignKey: "start_day_id", as: "start_date_times" });
-Shift.belongsTo(Date_time, { foreignKey: "end_day_id", as: "end_date_times" });
 Shift.belongsTo(Shift_Task_List, { foreignKey: "shift_task_list_id", as: "shift_task_lists" });
 Shift.belongsTo(Qualification_List, { foreignKey: "qualification_list_id", as: "qualification_lists" });
 //Shift Associations end here
@@ -186,8 +182,6 @@ Qualification.belongsTo(Qualification_List, { foreignKey: "qualification_list_id
 //Qualification Associations end here
 
 //Date_Time Associations start here
-Date_time.hasMany(Shift, { foreignKey: "start_day_id", as: "start_day_times" });
-Date_time.hasMany(Shift, { foreignKey: "end_day_id", as: "end_day_times" });
 Date_time.hasMany(Department_Schedule, { foreignKey: "su_schedule", as: "su_schedule_times" });
 Date_time.hasMany(Department_Schedule, { foreignKey: "mo_schedule", as: "mo_schedule_times" });
 Date_time.hasMany(Department_Schedule, { foreignKey: "tu_schedule", as: "tu_schedule_times" });
@@ -197,8 +191,6 @@ Date_time.hasMany(Department_Schedule, { foreignKey: "fr_schedule", as: "fr_sche
 Date_time.hasMany(Department_Schedule, { foreignKey: "sa_schedule", as: "sa_schedule_times" });
 Date_time.hasMany(Availability, { foreignKey: "start_day_id", as: "availability_start_times" });
 Date_time.hasMany(Availability, { foreignKey: "end_day_id", as: "availability_end_times" });
-Date_time.hasMany(Weekly_Schedule, { foreignKey: "start_day_id", as: "weekly_schedule_start_times" });
-Date_time.hasMany(Weekly_Schedule, { foreignKey: "end_day_id", as: "weekly_schedule_end_times" });
 //Date_Time Associations end here
 
 
