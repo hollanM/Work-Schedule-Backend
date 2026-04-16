@@ -13,7 +13,6 @@ exports.create = (req, res) => {
     end_day_id: req.body.end_day_id,
     is_template: req.body.is_template,
     department_id: req.body.department_id,
-    user_id: req.body.user_id
   };
   
   logger.debug(`Creating Weekly_Schedule...`);
