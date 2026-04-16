@@ -12,21 +12,12 @@ const Weekly_Schedule = SequelizeInstance.define("weekly_schedules", {
         allowNull: true,
       defaultValue: null,
 
-    references:{
-      model: "date_times",
-      key: "id",
-
-    },
   },
      end_day:{
         type: Sequelize.DATE,
         allowNull: true,
       defaultValue: null,
-      
-    references:{
-      model: "date_times",
-      key: "id",
-    }
+
 
     
     },
@@ -40,6 +31,16 @@ const Weekly_Schedule = SequelizeInstance.define("weekly_schedules", {
       allowNull: true,
       defaultValue: null
     },
+
+    user_id:{
+      type: Sequelize.INTEGER,
+      allowNull: true,
+      defaultValue: null,
+      references:{
+        model: "users",
+        key: "id"
+      }
+    }
   });
   
 

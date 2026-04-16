@@ -105,6 +105,7 @@ Clock_In_Out.belongsTo(Department, { foreignKey: "department_id", as: "departmen
 
 //Weekly_Schedule foreign key associations start here
 Weekly_Schedule.belongsTo(Department, { foreignKey: "department_id", as: "departments" });
+Weekly_Schedule.belongsTo(User, { foreignKey: "user_id", as: "users" });
 //Weekly_Schedule foreign key associations end here
 
 //Department Schedule Associations start here
@@ -210,6 +211,7 @@ User.hasMany(NotificationList, { foreignKey: "user_id", as: "notification_lists"
 User.hasMany(Qualification_List, { foreignKey: "user_id", as: "qualification_lists" });
 User.hasMany(Clock_List, { foreignKey: "user_id", as: "clock_lists" });
 User.hasMany(In_App_Settings, { foreignKey: "user_id", as: "in_app_settings" });
+User.hasMany(Weekly_Schedule, { foreignKey: "user_id", as: "weekly_schedules" });
 //User Associations end here
 
 //In_App_Settings Associations start here

@@ -33,10 +33,7 @@ const Shift = SequelizeInstance.define("shifts", {
     allowNull: true, //you might want to set this as false later.
     //foreign key constraint for date_times table
     
-    references:{
-      model: "date_times",
-      key: "id",
-    }
+
       
    },
 
@@ -44,11 +41,7 @@ const Shift = SequelizeInstance.define("shifts", {
     type: Sequelize.DATE,
     allowNull: true, //you might want to set this as false later.
     //foreign key constraint for date_times table
-    
-    references:{
-      model: "date_times",
-      key: "id",
-    }
+
       
    },
    position_id:{
