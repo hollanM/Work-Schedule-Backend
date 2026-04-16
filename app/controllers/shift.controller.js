@@ -7,6 +7,7 @@ const exports = {};
 // Create and Save a new Shift
 exports.create = (req, res) => {
 
+  //New change trust me
   // Create a Shift
   const shift = {
     //please tell me how to turn suggestions off :(
@@ -19,7 +20,6 @@ exports.create = (req, res) => {
     department_id: req.body.department_id,
     qualification_list_id: req.body.qualification_list_id,
     color: req.body.color,
-
 
     //non id fields
     open_to_take: req.body.open_to_take || false,
