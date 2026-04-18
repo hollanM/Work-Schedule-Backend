@@ -8,9 +8,8 @@ const exports = {};
 exports.create = (req, res) => {
   // Create a Weekly_Schedule
   const weekly_schedule =  {
-    name: req.body.name,
-    start_day_id: req.body.start_day_id,
-    end_day_id: req.body.end_day_id,
+    start_day: req.body.start_day,
+    end_day: req.body.end_day,
     is_template: req.body.is_template,
     department_id: req.body.department_id,
     user_id: req.body.user_id
