@@ -20,7 +20,7 @@ exports.create = (req, res) => {
   // Save Weekly_Schedule in the database
   Weekly_Schedule.create(weekly_schedule)
     .then((data) => {
-      logger.info(`Weekly_Schedule created successfully: ${data.id} - ${data.name}`);
+      logger.info(`Weekly_Schedule created successfully: ${data.id}`);
       res.send(data);
     })
     .catch((err) => {
