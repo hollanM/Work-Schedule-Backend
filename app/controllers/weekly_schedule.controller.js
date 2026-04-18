@@ -2,6 +2,8 @@ import db  from "../models/index.js";
 import logger from "../config/logger.js";
 
 const Weekly_Schedule = db.weekly_schedule;
+const Shift = db.shift;
+const DateTime = db.date_time;
 const Op = db.Sequelize.Op;
 const exports = {};
 // Create and Save a new Weekly_Schedule
@@ -10,19 +12,14 @@ exports.create = (req, res) => {
   const weekly_schedule =  {
     start_day: req.body.start_day,
     end_day: req.body.end_day,
-    is_template: req.body.is_template,
+    is_template: req.body.is_template || false,
     department_id: req.body.department_id,
     user_id: req.body.user_id
   };
   
-  logger.debug(`Creating Weekly_Schedule...`);
-  
   // Save Weekly_Schedule in the database
   Weekly_Schedule.create(weekly_schedule)
-    .then((data) => {
-      logger.info(`Weekly_Schedule created successfully: ${data.id}`);
-      res.send(data);
-    })
+    .then(data => res.send(data))
     .catch((err) => {
       logger.error(`Error creating Weekly_Schedule: ${err.message}`);
       res.status(500).send({
@@ -32,13 +29,8 @@ exports.create = (req, res) => {
     });
 };
 // Retrieve all Qualification_Lists from the database.
-exports.findAll = (req, res) => {
-  const title = req.query.title;
-  var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
-  
-  logger.debug(`Fetching all Qualification_Lists with condition: ${JSON.stringify(condition)}`);
-  
-  Weekly_Schedule.findAll({ where: condition })
+exports.findAll = (req, res) => {  
+  Weekly_Schedule.findAll()
     .then((data) => {
       logger.info(`Retrieved ${data.length} Qualification_Lists`);
       res.send(data);
@@ -54,14 +46,13 @@ exports.findAll = (req, res) => {
 
 // Find a single Weekly_Schedule with an id
 exports.findAllForUser = (req, res) => {
-  const userId = req.params.userId;
-  Weekly_Schedule.findAll({ where: { userId: userId } })
+  Weekly_Schedule.findAll({ where: { userId: req.params.id } })
     .then((data) => {
       if (data) {
         res.send(data);
       } else {
         res.status(404).send({
-          message: `Cannot find Qualification_Lists for user with id=${userId}.`,
+          message: `Cannot find Weekly_Schedules for user the`,
         });
       }
     })
@@ -69,7 +60,7 @@ exports.findAllForUser = (req, res) => {
       res.status(500).send({
         message:
           err.message ||
-          "Error retrieving Qualification_Lists for user with id=" + userId,
+          "Error retrieving Weekly_Schedules for user with id=" + req.params.id,
       });
     });
 };
@@ -120,6 +111,8 @@ exports.update = (req, res) => {
       });
     });
 };
+
+
 // Delete a Weekly_Schedule with the specified id in the request
 exports.delete = (req, res) => {
   const id = req.params.id;
@@ -148,5 +141,10 @@ exports.delete = (req, res) => {
       });
     });
 };
+
+
+
+//Saving the template for the currently viewed week.
+
 
 export default exports;
